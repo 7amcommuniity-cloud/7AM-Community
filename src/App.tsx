@@ -151,7 +151,7 @@ const PHOTOS = [
   "/bag.jpeg",
   "/group.jpeg",
   "/pranav.jpeg",
-  "/qr.jpeg",
+  "/tie.PNG",
   "/run.PNG",
   "/side.jpeg"
 ];
