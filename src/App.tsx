@@ -27,6 +27,12 @@ import {
   Star,
   Loader2
 } from 'lucide-react';
+import archive1 from './assets/archive/archive-1.jpg';
+import archive2 from './assets/archive/archive-2.jpg';
+import archive3 from './assets/archive/archive-3.jpg';
+import archive4 from './assets/archive/archive-4.jpg';
+import archive5 from './assets/archive/archive-5.jpg';
+import archive6 from './assets/archive/archive-6.jpg';
 import { db, handleFirestoreError, OperationType } from './lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
@@ -161,13 +167,16 @@ const EVENTS: Event[] = [
   }
 ];
 
+const archivePhotos = [archive1, archive2, archive3, archive4, archive5, archive6];
+
 const PHOTOS = [
-  "/shoe.PNG",
-  "/side.jpeg",
-  "/tie.PNG",
-  "/walk.jpeg",
-  "/pranav run.jpeg",
-  "/back.jpeg"
+  ...archivePhotos,
+  "https://lh3.googleusercontent.com/d/1i-ObucK8vw5G7PgeFiWWWKLk5khKDyCj",
+  "https://lh3.googleusercontent.com/d/1tIbM-yextF_rCuVxeZRMp0PdL1xHO5MF",
+  "https://lh3.googleusercontent.com/d/1v4LniqTg2LUOnm8WfXGLrwFgM8_8JoY2",
+  "https://lh3.googleusercontent.com/d/1seBd9eaBurP2eXL-Hy5O5Wboxyh9iCIU",
+  "https://lh3.googleusercontent.com/d/1PuuL5SQgTkUKk_xNzA4U7KYE_yVT4QKs",
+  "https://lh3.googleusercontent.com/d/1DjyEBN17WLCEI3i47VKCV3RDDgYaY7BJ"
 ];
 
 const BLOG_POSTS: BlogPost[] = [
@@ -417,12 +426,12 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     <div className="absolute -inset-4 bg-brand-yellow/30 blur-2xl opacity-20 group-hover:opacity-50 transition duration-1000"></div>
                     <div className="relative bg-white p-3 md:p-4 rounded-xl shadow-[0_0_50px_rgba(255,255,0,0.2)] border-2 border-brand-yellow/30">
                       <img 
-                        src="/qr.jpeg" 
+                        src="https://lh3.googleusercontent.com/d/1l0TJkSDlM0X3XWXZdtc8gQahSf7gKvX-" 
                         alt="Payments QR" 
                         className="w-full h-full object-contain rounded-lg"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "/qr.jpeg"; 
+                          target.src = "input_file_9.png"; 
                         }}
                       />
                     </div>
