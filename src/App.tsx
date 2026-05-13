@@ -1030,6 +1030,7 @@ export default function App() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => document.getElementById('enquiry-form')?.scrollIntoView({ behavior: 'smooth' })}
             className="bg-white text-black px-12 py-6 font-black uppercase tracking-[0.4em] text-sm hover:bg-brand-yellow transition-all brutal-border"
           >
             Open Transmission
@@ -1093,6 +1094,7 @@ export default function App() {
             </div>
 
             <motion.div 
+              id="enquiry-form"
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
