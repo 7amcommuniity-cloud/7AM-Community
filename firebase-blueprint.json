@@ -27,9 +27,10 @@
         "event": { "type": "string" },
         "transactionId": { "type": "string" },
         "createdAt": { "type": "string", "format": "date-time" },
+        "registeredAt": { "type": "string", "format": "date-time" },
         "status": { "type": "string", "enum": ["pending", "verified"] }
       },
-      "required": ["name", "email", "phone", "gender", "event", "transactionId", "createdAt", "status"]
+      "required": ["name", "email", "phone", "gender", "event", "transactionId", "createdAt", "registeredAt", "status"]
     }
   },
   "firestore": {
@@ -40,6 +41,10 @@
     "/registrations/{registrationId}": {
       "schema": "Registration",
       "description": "Collection of event registrations"
+    },
+    "/events_2025_new/{registrationId}": {
+      "schema": "Registration",
+      "description": "New collection for event registrations starting May 2025"
     }
   }
 }

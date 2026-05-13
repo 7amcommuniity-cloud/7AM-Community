@@ -116,6 +116,8 @@ const StravaIcon = ({ size = 20, className = "" }) => (
 );
 
 // --- Types ---
+type EventStatus = 'open' | 'closed' | 'soon';
+
 interface Event {
   id: string;
   title: string;
@@ -124,6 +126,7 @@ interface Event {
   time: string;
   description: string;
   difficulty: "Beginner" | "Intermediate" | "Advanced";
+  status?: EventStatus;
 }
 
 interface BlogPost {
@@ -143,17 +146,28 @@ const EVENTS: Event[] = [
     location: 'The Kuti Project, Balewadi High Street',
     time: '7:15 AM',
     description: 'Our flagship morning session. Every pace, every story. Meet us for the miles, stay for the brew.',
-    difficulty: 'Beginner'
+    difficulty: 'Beginner',
+    status: 'closed'
+  },
+  {
+    id: '2',
+    title: 'COMING SOON',
+    date: 'May 24, 2026',
+    location: 'TBD',
+    time: 'TBD',
+    description: 'A new challenge awaits. Prepare your soul for the next chapter of the morning ritual.',
+    difficulty: 'Beginner',
+    status: 'soon'
   }
 ];
 
 const PHOTOS = [
-  "/bag.jpeg",
-  "/group.jpeg",
-  "/pranav.jpeg",
-  "/tie.PNG",
-  "/run.PNG",
-  "/side.jpeg"
+  "https://lh3.googleusercontent.com/d/1i-ObucK8vw5G7PgeFiWWWKLk5khKDyCj",
+  "https://lh3.googleusercontent.com/d/1tIbM-yextF_rCuVxeZRMp0PdL1xHO5MF",
+  "https://lh3.googleusercontent.com/d/1v4LniqTg2LUOnm8WfXGLrwFgM8_8JoY2",
+  "https://lh3.googleusercontent.com/d/1seBd9eaBurP2eXL-Hy5O5Wboxyh9iCIU",
+  "https://lh3.googleusercontent.com/d/1PuuL5SQgTkUKk_xNzA4U7KYE_yVT4QKs",
+  "https://lh3.googleusercontent.com/d/1DjyEBN17WLCEI3i47VKCV3RDDgYaY7BJ"
 ];
 
 const BLOG_POSTS: BlogPost[] = [
@@ -294,16 +308,20 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
     email: '',
     phone: '',
     gender: '',
-    event: selectedEvent || EVENTS[0].title
+    event: selectedEvent || EVENTS[EVENTS.length - 1].title
   });
   const [transactionId, setTransactionId] = useState('');
 
   const isValidPhone = (p: string) => /^\d{10}$/.test(p);
 
+  const currentEvent = EVENTS.find(e => e.title === formData.event);
+  const isClosed = currentEvent?.status === 'closed';
+  const isSoon = currentEvent?.status === 'soon';
+
   useEffect(() => {
     if (isOpen) {
       setStep('register');
-      setFormData(prev => ({ ...prev, event: selectedEvent || EVENTS[0].title }));
+      setFormData(prev => ({ ...prev, event: selectedEvent || EVENTS[EVENTS.length - 1].title }));
       setTransactionId('');
       setIsLoading(false);
     }
@@ -324,13 +342,14 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
         ...formData,
         transactionId: transactionId.trim(),
         createdAt: serverTimestamp(),
+        registeredAt: serverTimestamp(),
         status: 'pending'
       };
 
-      await addDoc(collection(db, 'registrations'), registrationData);
+      await addDoc(collection(db, 'events_2025_new'), registrationData);
       setStep('confirmed');
     } catch (error) {
-      handleFirestoreError(error, OperationType.CREATE, 'registrations');
+      handleFirestoreError(error, OperationType.CREATE, 'events_2025_new');
     } finally {
       setIsLoading(false);
     }
@@ -398,12 +417,12 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     <div className="absolute -inset-4 bg-brand-yellow/30 blur-2xl opacity-20 group-hover:opacity-50 transition duration-1000"></div>
                     <div className="relative bg-white p-3 md:p-4 rounded-xl shadow-[0_0_50px_rgba(255,255,0,0.2)] border-2 border-brand-yellow/30">
                       <img 
-                        src="/qr.jpeg" 
+                        src="https://lh3.googleusercontent.com/d/1l0TJkSDlM0X3XWXZdtc8gQahSf7gKvX-" 
                         alt="Payments QR" 
                         className="w-full h-full object-contain rounded-lg"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "/qr.jpeg"; 
+                          target.src = "input_file_9.png"; 
                         }}
                       />
                     </div>
@@ -517,22 +536,33 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                         required
                         value={formData.event}
                         onChange={(e) => setFormData({...formData, event: e.target.value})}
-                        className="w-full bg-white/5 border-b-2 border-white/10 p-4 focus:border-brand-yellow outline-none transition-all text-lg font-medium appearance-none cursor-pointer"
+                        className={`w-full bg-white/5 border-b-2 p-4 outline-none transition-all text-lg font-medium appearance-none cursor-pointer ${isClosed ? 'border-red-500/50' : isSoon ? 'border-brand-yellow/30' : 'border-white/10 focus:border-brand-yellow'}`}
                       >
                         {EVENTS.map(evt => (
-                          <option key={evt.id} value={evt.title} className="bg-brand-black">{evt.title}</option>
+                          <option key={evt.id} value={evt.title} className="bg-brand-black">
+                            {evt.title} {evt.status === 'closed' ? '(CLOSED)' : evt.status === 'soon' ? '(SOON)' : ''}
+                          </option>
                         ))}
                       </select>
                       <ChevronRight className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 text-brand-yellow pointer-events-none" />
                     </div>
+                    {isClosed ? (
+                      <p className="text-red-500 text-[10px] uppercase font-black tracking-widest mt-2 animate-pulse">
+                        REGISTRATION CLOSED FOR THIS EVENT
+                      </p>
+                    ) : isSoon && (
+                      <p className="text-brand-yellow/50 text-[10px] uppercase font-black tracking-widest mt-2">
+                        REGISTRATIONS OPENING SOON
+                      </p>
+                    )}
                   </div>
 
                   <button 
                     type="submit"
-                    disabled={!isValidPhone(formData.phone) || !formData.name || !formData.email}
+                    disabled={!isValidPhone(formData.phone) || !formData.name || !formData.email || isClosed || isSoon}
                     className="w-full bg-brand-yellow text-brand-black font-black text-xl py-6 mt-4 uppercase tracking-[0.2em] hover:bg-white hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-brand-yellow/10 disabled:opacity-50 disabled:cursor-not-allowed disabled:grayscale"
                   >
-                    Confirm Registration
+                    {isClosed ? 'REGISTRATION CLOSED' : isSoon ? 'COMING SOON' : 'Confirm Registration'}
                   </button>
                 </form>
               </>
@@ -731,7 +761,7 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              onClick={() => handleSignup(EVENTS[0].title)}
+              onClick={() => handleSignup(EVENTS[EVENTS.length - 1].title)}
               className="mt-12 md:hidden flex items-center justify-between w-full bg-brand-yellow text-black font-black p-6 uppercase tracking-tighter group transition-all"
             >
               Sign Up For The Next Run
@@ -745,7 +775,7 @@ export default function App() {
           <motion.div 
             whileHover={{ scale: 1.02 }}
             className="bg-black p-12 border-t-4 border-brand-yellow shadow-2xl relative z-10 group cursor-pointer transition-all"
-            onClick={() => handleSignup(EVENTS[0].title)}
+            onClick={() => handleSignup(EVENTS[EVENTS.length - 1].title)}
           >
             <div className="flex items-center justify-between mb-8">
               <h3 className="text-4xl font-black italic tracking-tighter uppercase leading-none group-hover:text-brand-yellow transition-colors">
@@ -856,10 +886,17 @@ export default function App() {
               </div>
               
               <button 
-                onClick={() => handleSignup(event.title)}
-                className="mt-auto w-full py-4 border border-brand-yellow text-brand-yellow font-black uppercase text-[10px] tracking-[0.3em] hover:bg-brand-yellow hover:text-black transition-all"
+                onClick={() => event.status !== 'closed' && event.status !== 'soon' && handleSignup(event.title)}
+                disabled={event.status === 'closed' || event.status === 'soon'}
+                className={`mt-auto w-full py-4 border font-black uppercase text-[10px] tracking-[0.3em] transition-all ${
+                  event.status === 'closed' 
+                    ? 'border-white/10 text-white/20 cursor-not-allowed' 
+                    : event.status === 'soon'
+                    ? 'border-brand-yellow/30 text-brand-yellow/50 cursor-not-allowed'
+                    : 'border-brand-yellow text-brand-yellow hover:bg-brand-yellow hover:text-black'
+                }`}
               >
-                Assemble
+                {event.status === 'closed' ? 'REGISTRATIONS CLOSED' : event.status === 'soon' ? 'COMING SOON' : 'Assemble'}
               </button>
             </motion.div>
           ))}
