@@ -157,13 +157,12 @@ const EVENTS: Event[] = [
   },
   {
     id: '2',
-    title: 'COMING SOON',
+    title: '7AM X THIRD WAVE SUNDAY RUN',
     date: 'May 24, 2026',
-    location: 'TBD',
-    time: 'TBD',
-    description: 'A new challenge awaits. Prepare your soul for the next chapter of the morning ritual.',
-    difficulty: 'Beginner',
-    status: 'soon'
+    location: 'Third Wave Coffee, Aundh',
+    time: '7:15 AM',
+    description: 'A morning ritual in the heart of Aundh. Fuel your soul with miles and caffeine.',
+    difficulty: 'Beginner'
   }
 ];
 
@@ -755,9 +754,9 @@ export default function App() {
               <div className="p-6 border border-white/10 bg-white/5 backdrop-blur-sm group hover:border-brand-yellow transition-colors rounded-xs">
                 <h3 className="text-brand-yellow uppercase text-[10px] font-bold tracking-widest mb-2">NEXT RUN</h3>
                 <p className="text-sm text-white/70 leading-relaxed font-light uppercase">
-                  Coffee Run · 10 May<br/>
-                  7:15 AM · The Kuti Project<br/>
-                  Balewadi High Street, Pune
+                  Third Wave Sunday Run · 24 May<br/>
+                  7:15 AM · Third Wave Coffee<br/>
+                  Aundh, Pune
                 </p>
               </div>
               <div className="p-6 border border-white/10 bg-white/5 backdrop-blur-sm group hover:border-brand-yellow transition-colors rounded-xs">
