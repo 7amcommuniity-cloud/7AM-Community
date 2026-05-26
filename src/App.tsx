@@ -27,12 +27,6 @@ import {
   Star,
   Loader2
 } from 'lucide-react';
-import archive1 from './assets/archive/archive-1.jpg';
-import archive2 from './assets/archive/archive-2.jpg';
-import archive3 from './assets/archive/archive-3.jpg';
-import archive4 from './assets/archive/archive-4.jpg';
-import archive5 from './assets/archive/archive-5.jpg';
-import archive6 from './assets/archive/archive-6.jpg';
 import { db, handleFirestoreError, OperationType } from './lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
@@ -177,10 +171,7 @@ const EVENTS: Event[] = [
   }
 ];
 
-const archivePhotos = [archive1, archive2, archive3, archive4, archive5, archive6];
-
 const PHOTOS = [
-  ...archivePhotos,
   "https://lh3.googleusercontent.com/d/1i-ObucK8vw5G7PgeFiWWWKLk5khKDyCj",
   "https://lh3.googleusercontent.com/d/1tIbM-yextF_rCuVxeZRMp0PdL1xHO5MF",
   "https://lh3.googleusercontent.com/d/1v4LniqTg2LUOnm8WfXGLrwFgM8_8JoY2",
