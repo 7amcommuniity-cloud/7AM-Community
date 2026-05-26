@@ -164,6 +164,16 @@ const EVENTS: Event[] = [
     description: 'A morning ritual in the heart of Aundh. Fuel your soul with miles and caffeine.',
     difficulty: 'Beginner',
     status: 'closed'
+  },
+  {
+    id: '3',
+    title: '7AM X STARBUCKS GRANDE RUN',
+    date: 'May 31, 2026',
+    location: 'Starbucks, FC Road',
+    time: '7:15 AM',
+    description: 'Lace up for our Sunday edition in collaboration with Starbucks. Wake up, run miles, and share a Grande brew.',
+    difficulty: 'Intermediate',
+    status: 'open'
   }
 ];
 
@@ -346,6 +356,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
     if (!transactionId.trim()) return;
 
     setIsLoading(true);
+    const targetCollection = formData.event === '7AM X STARBUCKS GRANDE RUN' ? 'event_starbucks' : 'events_2025_new';
     try {
       const registrationData = {
         ...formData,
@@ -355,10 +366,10 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
         status: 'pending'
       };
 
-      await addDoc(collection(db, 'events_2025_new'), registrationData);
+      await addDoc(collection(db, targetCollection), registrationData);
       setStep('confirmed');
     } catch (error) {
-      handleFirestoreError(error, OperationType.CREATE, 'events_2025_new');
+      handleFirestoreError(error, OperationType.CREATE, targetCollection);
     } finally {
       setIsLoading(false);
     }
@@ -417,7 +428,9 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                   
                   <div className="bg-brand-yellow/10 border border-brand-yellow/30 py-2 md:py-3 px-4 md:px-6 rounded-xl inline-block">
                     <span className="text-white/60 uppercase tracking-widest text-[9px] md:text-xs font-bold mr-2">Registration Fee:</span>
-                    <span className="text-2xl md:text-3xl font-black text-brand-yellow">₹299</span>
+                    <span className="text-2xl md:text-3xl font-black text-brand-yellow">
+                      ₹{formData.event === '7AM X STARBUCKS GRANDE RUN' ? '399' : '299'}
+                    </span>
                   </div>
                 </div>
                 

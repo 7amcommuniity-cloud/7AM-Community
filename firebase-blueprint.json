@@ -45,6 +45,10 @@
     "/events_2025_new/{registrationId}": {
       "schema": "Registration",
       "description": "New collection for event registrations starting May 2025"
+    },
+    "/event_starbucks/{registrationId}": {
+      "schema": "Registration",
+      "description": "New collection for Starbucks Grande Run event registrations"
     }
   }
 }
