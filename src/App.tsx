@@ -162,7 +162,8 @@ const EVENTS: Event[] = [
     location: 'Third Wave Coffee, Aundh',
     time: '7:15 AM',
     description: 'A morning ritual in the heart of Aundh. Fuel your soul with miles and caffeine.',
-    difficulty: 'Beginner'
+    difficulty: 'Beginner',
+    status: 'closed'
   }
 ];
 
@@ -425,12 +426,12 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     <div className="absolute -inset-4 bg-brand-yellow/30 blur-2xl opacity-20 group-hover:opacity-50 transition duration-1000"></div>
                     <div className="relative bg-white p-3 md:p-4 rounded-xl shadow-[0_0_50px_rgba(255,255,0,0.2)] border-2 border-brand-yellow/30">
                       <img 
-                        src="/qr.jpeg" 
+                        src="https://lh3.googleusercontent.com/d/1l0TJkSDlM0X3XWXZdtc8gQahSf7gKvX-" 
                         alt="Payments QR" 
                         className="w-full h-full object-contain rounded-lg"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "/qr.jpeg"; 
+                          target.src = "input_file_9.png"; 
                         }}
                       />
                     </div>
@@ -594,6 +595,8 @@ export default function App() {
     return baseCount + Math.floor((now - startDate) / msPerRunner);
   });
 
+  const nextRun = EVENTS.find(e => e.status !== 'closed') || EVENTS[EVENTS.length - 1];
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -754,9 +757,19 @@ export default function App() {
               <div className="p-6 border border-white/10 bg-white/5 backdrop-blur-sm group hover:border-brand-yellow transition-colors rounded-xs">
                 <h3 className="text-brand-yellow uppercase text-[10px] font-bold tracking-widest mb-2">NEXT RUN</h3>
                 <p className="text-sm text-white/70 leading-relaxed font-light uppercase">
-                  Third Wave Sunday Run · 24 May<br/>
-                  7:15 AM · Third Wave Coffee<br/>
-                  Aundh, Pune
+                  {nextRun.status === 'soon' ? (
+                    <>
+                      {nextRun.title}<br/>
+                      {nextRun.date} · {nextRun.location}<br/>
+                      STAY TUNED
+                    </>
+                  ) : (
+                    <>
+                      {nextRun.title} · {nextRun.date}<br/>
+                      {nextRun.time} · {nextRun.location}<br/>
+                      Pune
+                    </>
+                  )}
                 </p>
               </div>
               <div className="p-6 border border-white/10 bg-white/5 backdrop-blur-sm group hover:border-brand-yellow transition-colors rounded-xs">
@@ -881,7 +894,11 @@ export default function App() {
                   {event.difficulty}
                 </div>
                 <div className="text-right">
-                  <span className="block text-2xl font-black tracking-tighter italic uppercase">{event.date.split(' ')[1].replace(',', '')} {event.date.split(' ')[0]}</span>
+                  <span className="block text-2xl font-black tracking-tighter italic uppercase">
+                    {event.date.includes(' ') && event.date.split(' ').length > 1
+                      ? `${event.date.split(' ')[1].replace(',', '')} ${event.date.split(' ')[0]}`
+                      : event.date}
+                  </span>
                   <span className="text-[10px] text-white/40 font-bold tracking-widest uppercase">{event.time}</span>
                 </div>
               </div>
