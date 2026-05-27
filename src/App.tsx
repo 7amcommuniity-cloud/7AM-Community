@@ -172,12 +172,12 @@ const EVENTS: Event[] = [
 ];
 
 const PHOTOS = [
-  "https://lh3.googleusercontent.com/d/1i-ObucK8vw5G7PgeFiWWWKLk5khKDyCj",
-  "https://lh3.googleusercontent.com/d/1tIbM-yextF_rCuVxeZRMp0PdL1xHO5MF",
-  "https://lh3.googleusercontent.com/d/1v4LniqTg2LUOnm8WfXGLrwFgM8_8JoY2",
-  "https://lh3.googleusercontent.com/d/1seBd9eaBurP2eXL-Hy5O5Wboxyh9iCIU",
-  "https://lh3.googleusercontent.com/d/1PuuL5SQgTkUKk_xNzA4U7KYE_yVT4QKs",
-  "https://lh3.googleusercontent.com/d/1DjyEBN17WLCEI3i47VKCV3RDDgYaY7BJ"
+  "IMG1.jpeg",
+  "IMG2.jpeg",
+  "IMG3.jpeg",
+  "IMG4.jpeg",
+  "IMG5.jpeg",
+  "IMG6.jpeg"
 ];
 
 const BLOG_POSTS: BlogPost[] = [
