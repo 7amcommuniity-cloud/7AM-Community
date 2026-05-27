@@ -163,7 +163,7 @@ const EVENTS: Event[] = [
     id: '3',
     title: '7AM X STARBUCKS GRANDE RUN',
     date: 'May 31, 2026',
-    location: 'Starbucks, FC Road',
+    location: 'Starbucks, BALEWADI HIGH STREET',
     time: '7:15 AM',
     description: 'Lace up for our Sunday edition in collaboration with Starbucks. Wake up, run miles, and share a Grande brew.',
     difficulty: 'Intermediate',
