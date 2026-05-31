@@ -163,21 +163,21 @@ const EVENTS: Event[] = [
     id: '3',
     title: '7AM X STARBUCKS GRANDE RUN',
     date: 'May 31, 2026',
-    location: 'Starbucks, BALEWADI HIGH STREET',
+    location: 'Starbucks, FC Road',
     time: '7:15 AM',
     description: 'Lace up for our Sunday edition in collaboration with Starbucks. Wake up, run miles, and share a Grande brew.',
     difficulty: 'Intermediate',
-    status: 'open'
+    status: 'closed'
   }
 ];
 
 const PHOTOS = [
-  "IMG1.jpeg",
-  "IMG2.jpeg",
-  "IMG3.jpeg",
-  "IMG4.jpeg",
-  "IMG5.jpeg",
-  "IMG6.jpeg"
+  "https://lh3.googleusercontent.com/d/1i-ObucK8vw5G7PgeFiWWWKLk5khKDyCj",
+  "https://lh3.googleusercontent.com/d/1tIbM-yextF_rCuVxeZRMp0PdL1xHO5MF",
+  "https://lh3.googleusercontent.com/d/1v4LniqTg2LUOnm8WfXGLrwFgM8_8JoY2",
+  "https://lh3.googleusercontent.com/d/1seBd9eaBurP2eXL-Hy5O5Wboxyh9iCIU",
+  "https://lh3.googleusercontent.com/d/1PuuL5SQgTkUKk_xNzA4U7KYE_yVT4QKs",
+  "https://lh3.googleusercontent.com/d/1DjyEBN17WLCEI3i47VKCV3RDDgYaY7BJ"
 ];
 
 const BLOG_POSTS: BlogPost[] = [
@@ -430,12 +430,12 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     <div className="absolute -inset-4 bg-brand-yellow/30 blur-2xl opacity-20 group-hover:opacity-50 transition duration-1000"></div>
                     <div className="relative bg-white p-3 md:p-4 rounded-xl shadow-[0_0_50px_rgba(255,255,0,0.2)] border-2 border-brand-yellow/30">
                       <img 
-                        src="/qrr.jpeg" 
+                        src="https://lh3.googleusercontent.com/d/1l0TJkSDlM0X3XWXZdtc8gQahSf7gKvX-" 
                         alt="Payments QR" 
                         className="w-full h-full object-contain rounded-lg"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "/qrr.jpeg"; 
+                          target.src = "input_file_9.png"; 
                         }}
                       />
                     </div>
