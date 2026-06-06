@@ -599,14 +599,14 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
 
 const EVENT_PHOTOS_MAPPING: Record<string, string[]> = {
   '7AM X STARBUCKS GRANDE RUN': [
-    "https://lh3.googleusercontent.com/d/1i-ObucK8vw5G7PgeFiWWWKLk5khKDyCj",
-    "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80",
+    ttps://lh3.googleusercontent.com/d/1i-ObucK8vw5G7PgeFiWWWKLk5khKDyCj",
+    "https://images.unsplash.com/p"hhoto-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1486218119243-13883505764c?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"
   ],
   '7AM X THIRD WAVE SUNDAY RUN': [
     "https://lh3.googleusercontent.com/d/1v4LniqTg2LUOnm8WfXGLrwFgM8_8JoY2",
-    "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=800&q=80",
+    "https://unsplash.com/photos/h--EfqcinxE",
     "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1530143311094-34d807799e8f?auto=format&fit=crop&w=800&q=80"
   ],
