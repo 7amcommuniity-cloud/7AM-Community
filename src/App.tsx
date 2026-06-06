@@ -140,13 +140,23 @@ interface BlogPost {
 // --- Data ---
 const EVENTS: Event[] = [
   {
-    id: '1',
-    title: '7 AM X Kuti Coffee Run',
-    date: 'May 10, 2026',
-    location: 'The Kuti Project, Balewadi High Street',
+    id: '4',
+    title: '7AM X MURPHIES BISTRO RUN',
+    date: 'June 14, 2026',
+    location: 'MURPHIES, PRABHAT ROAD',
     time: '7:15 AM',
-    description: 'Our flagship morning session. Every pace, every story. Meet us for the miles, stay for the brew.',
-    difficulty: 'Beginner',
+    description: 'Lace up for our morning run ending at Murphies Bistro. Wake up, run intermediate miles, and connect over delicious brews.',
+    difficulty: 'Intermediate',
+    status: 'open'
+  },
+  {
+    id: '3',
+    title: '7AM X STARBUCKS GRANDE RUN',
+    date: 'May 31, 2026',
+    location: 'Starbucks, Balewadi High Street',
+    time: '7:15 AM',
+    description: 'Lace up for our Sunday edition in collaboration with Starbucks. Wake up, run miles, and share a Grande brew.',
+    difficulty: 'Intermediate',
     status: 'closed'
   },
   {
@@ -160,13 +170,13 @@ const EVENTS: Event[] = [
     status: 'closed'
   },
   {
-    id: '3',
-    title: '7AM X STARBUCKS GRANDE RUN',
-    date: 'May 31, 2026',
-    location: 'Starbucks, FC Road',
+    id: '1',
+    title: '7 AM X Kuti Coffee Run',
+    date: 'May 10, 2026',
+    location: 'The Kuti Project, Balewadi High Street',
     time: '7:15 AM',
-    description: 'Lace up for our Sunday edition in collaboration with Starbucks. Wake up, run miles, and share a Grande brew.',
-    difficulty: 'Intermediate',
+    description: 'Our flagship morning session. Every pace, every story. Meet us for the miles, stay for the brew.',
+    difficulty: 'Beginner',
     status: 'closed'
   }
 ];
@@ -318,7 +328,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
     email: '',
     phone: '',
     gender: '',
-    event: selectedEvent || EVENTS[EVENTS.length - 1].title
+    event: selectedEvent || EVENTS[0].title
   });
   const [transactionId, setTransactionId] = useState('');
 
@@ -331,7 +341,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
   useEffect(() => {
     if (isOpen) {
       setStep('register');
-      setFormData(prev => ({ ...prev, event: selectedEvent || EVENTS[EVENTS.length - 1].title }));
+      setFormData(prev => ({ ...prev, event: selectedEvent || EVENTS[0].title }));
       setTransactionId('');
       setIsLoading(false);
     }
@@ -420,7 +430,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                   <div className="bg-brand-yellow/10 border border-brand-yellow/30 py-2 md:py-3 px-4 md:px-6 rounded-xl inline-block">
                     <span className="text-white/60 uppercase tracking-widest text-[9px] md:text-xs font-bold mr-2">Registration Fee:</span>
                     <span className="text-2xl md:text-3xl font-black text-brand-yellow">
-                      ₹{formData.event === '7AM X STARBUCKS GRANDE RUN' ? '399' : '299'}
+                      ₹{['7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES BISTRO RUN'].includes(formData.event) ? '399' : '299'}
                     </span>
                   </div>
                 </div>
@@ -587,10 +597,206 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
   );
 };
 
+const EVENT_PHOTOS_MAPPING: Record<string, string[]> = {
+  '7AM X STARBUCKS GRANDE RUN': [
+    "https://lh3.googleusercontent.com/d/1i-ObucK8vw5G7PgeFiWWWKLk5khKDyCj",
+    "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1486218119243-13883505764c?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"
+  ],
+  '7AM X THIRD WAVE SUNDAY RUN': [
+    "https://lh3.googleusercontent.com/d/1v4LniqTg2LUOnm8WfXGLrwFgM8_8JoY2",
+    "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1530143311094-34d807799e8f?auto=format&fit=crop&w=800&q=80"
+  ],
+  '7 AM X Kuti Coffee Run': [
+    "https://lh3.googleusercontent.com/d/1seBd9eaBurP2eXL-Hy5O5Wboxyh9iCIU",
+    "https://lh3.googleusercontent.com/d/1PuuL5SQgTkUKk_xNzA4U7KYE_yVT4QKs",
+    "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?auto=format&fit=crop&w=800&q=80"
+  ],
+  '7AM X MURPHIES BISTRO RUN': [
+    "https://lh3.googleusercontent.com/d/1tIbM-yextF_rCuVxeZRMp0PdL1xHO5MF",
+    "https://lh3.googleusercontent.com/d/1DjyEBN17WLCEI3i47VKCV3RDDgYaY7BJ",
+    "https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=800&q=80"
+  ]
+};
+
+const PhotoGalleryModal = ({ isOpen, onClose, event }: { isOpen: boolean, onClose: () => void, event: Event | null }) => {
+  const [activePhotoIndex, setActivePhotoIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setActivePhotoIndex(null);
+    }
+  }, [isOpen]);
+
+  if (!event) return null;
+
+  const photos = EVENT_PHOTOS_MAPPING[event.title] || PHOTOS;
+
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (activePhotoIndex !== null) {
+      setActivePhotoIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : photos.length - 1));
+    }
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (activePhotoIndex !== null) {
+      setActivePhotoIndex((prev) => (prev !== null && prev < photos.length - 1 ? prev + 1 : 0));
+    }
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/95 backdrop-blur-md"
+          />
+
+          {/* Modal Container */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="relative bg-[#080808] border border-white/10 w-full max-w-4xl p-6 md:p-10 rounded-2xl shadow-3xl text-left overflow-y-auto max-h-[90vh]"
+          >
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="absolute top-6 right-6 bg-brand-yellow font-black text-black hover:bg-white transition-all p-3 rounded-lg shadow-lg cursor-pointer"
+            >
+              <X size={20} />
+            </button>
+
+            {/* Event Header Information */}
+            <div className="mb-8 pr-12">
+              <span className="text-brand-yellow font-bold uppercase tracking-[0.3em] text-[10px] block mb-2">EVENT ARCHIVE</span>
+              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter italic leading-none text-white mb-4">
+                {event.title}
+              </h2>
+              <div className="flex flex-wrap gap-x-6 gap-y-2 mt-2 text-white/50 text-xs font-bold uppercase tracking-widest items-center">
+                <span className="flex items-center gap-2">
+                  <Calendar size={14} className="text-brand-yellow" />
+                  {event.date}
+                </span>
+                <span className="flex items-center gap-2">
+                  <MapPin size={14} className="text-brand-yellow" />
+                  {event.location}
+                </span>
+              </div>
+            </div>
+
+            {/* Gallery Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4">
+              {photos.map((src, idx) => (
+                <motion.div
+                  key={idx}
+                  whileHover={{ scale: 1.02 }}
+                  onClick={() => setActivePhotoIndex(idx)}
+                  className="relative aspect-square cursor-zoom-in overflow-hidden border border-white/10 group rounded-xl bg-[#111]"
+                >
+                  <img
+                    src={src}
+                    alt={`${event.title} memory ${idx + 1}`}
+                    className="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <span className="text-[10px] uppercase font-black text-brand-yellow tracking-widest flex items-center gap-1">
+                      <Camera size={12} /> View Large
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <p className="text-center text-xs text-white/30 uppercase tracking-[0.2em] mt-8">
+              7AM COMMUNITY · MEMORIES LOCKER
+            </p>
+          </motion.div>
+
+          {/* Lightbox Overlay */}
+          <AnimatePresence>
+            {activePhotoIndex !== null && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[130] bg-black/98 flex flex-col items-center justify-center p-4 select-none"
+              >
+                {/* Backdrop Click Closes */}
+                <div className="absolute inset-0 cursor-zoom-out" onClick={() => setActivePhotoIndex(null)} />
+
+                {/* Lightbox Controls */}
+                <button
+                  onClick={() => setActivePhotoIndex(null)}
+                  className="absolute top-6 right-6 z-[140] bg-brand-yellow text-black p-3 rounded-lg hover:bg-white transition-colors cursor-pointer"
+                >
+                  <X size={24} />
+                </button>
+
+                {/* Image Navigation */}
+                <div className="relative max-w-5xl max-h-[80vh] w-full h-full flex items-center justify-center z-[135]">
+                  <button
+                    onClick={handlePrev}
+                    className="absolute left-4 bg-black/60 border border-white/10 text-white p-4 hover:border-brand-yellow hover:text-brand-yellow transition-all rounded-full z-[140] cursor-pointer"
+                  >
+                    <ChevronRight size={24} className="rotate-180" />
+                  </button>
+
+                  <motion.img
+                    key={activePhotoIndex}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    src={photos[activePhotoIndex]}
+                    alt={`${event.title} large memory`}
+                    className="max-w-full max-h-full object-contain border border-white/5 rounded-lg shadow-2xl"
+                  />
+
+                  <button
+                    onClick={handleNext}
+                    className="absolute right-4 bg-black/60 border border-white/10 text-white p-4 hover:border-brand-yellow hover:text-brand-yellow transition-all rounded-full z-[140] cursor-pointer"
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                </div>
+
+                {/* Caption / Progress */}
+                <div className="absolute bottom-6 z-[135] text-center">
+                  <p className="text-sm tracking-widest text-brand-yellow uppercase font-black">
+                    {event.title}
+                  </p>
+                  <p className="text-xs text-white/50 mt-1 uppercase tracking-widest">
+                    Photo {activePhotoIndex + 1} of {photos.length}
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+};
+
 export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState('');
+  const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
+  const [photoModalEvent, setPhotoModalEvent] = useState<Event | null>(null);
   const [runnersCount, setRunnersCount] = useState(() => {
     const baseCount = 100;
     const startDate = new Date('2026-05-03T00:00:00Z').getTime();
@@ -599,7 +805,7 @@ export default function App() {
     return baseCount + Math.floor((now - startDate) / msPerRunner);
   });
 
-  const nextRun = EVENTS.find(e => e.status !== 'closed') || EVENTS[EVENTS.length - 1];
+  const nextRun = EVENTS.find(e => e.status !== 'closed') || EVENTS[0];
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -656,13 +862,18 @@ export default function App() {
     { label: 'EVENTS', id: 'events' },
     { label: 'WHATSAPP', id: 'whatsapp' },
     { label: 'COLLAB', id: 'collab' },
-    { label: 'PHOTOS', id: 'photos' },
+    { label: 'WINNERS', id: 'winners' },
     { label: 'CONTACT', id: 'contact' }
   ];
 
   const handleSignup = (eventName: string) => {
     setSelectedEvent(eventName);
     setIsModalOpen(true);
+  };
+
+  const handleViewPhotos = (event: Event) => {
+    setPhotoModalEvent(event);
+    setIsPhotoModalOpen(true);
   };
 
   return (
@@ -683,6 +894,12 @@ export default function App() {
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
         selectedEvent={selectedEvent} 
+      />
+
+      <PhotoGalleryModal 
+        isOpen={isPhotoModalOpen} 
+        onClose={() => setIsPhotoModalOpen(false)} 
+        event={photoModalEvent} 
       />
 
       {/* Navigation Rail */}
@@ -786,7 +1003,7 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              onClick={() => handleSignup(EVENTS[EVENTS.length - 1].title)}
+              onClick={() => handleSignup(EVENTS[0].title)}
               className="mt-12 md:hidden flex items-center justify-between w-full bg-brand-yellow text-black font-black p-6 uppercase tracking-tighter group transition-all"
             >
               Sign Up For The Next Run
@@ -800,7 +1017,7 @@ export default function App() {
           <motion.div 
             whileHover={{ scale: 1.02 }}
             className="bg-black p-12 border-t-4 border-brand-yellow shadow-2xl relative z-10 group cursor-pointer transition-all"
-            onClick={() => handleSignup(EVENTS[EVENTS.length - 1].title)}
+            onClick={() => handleSignup(EVENTS[0].title)}
           >
             <div className="flex items-center justify-between mb-8">
               <h3 className="text-4xl font-black italic tracking-tighter uppercase leading-none group-hover:text-brand-yellow transition-colors">
@@ -821,7 +1038,7 @@ export default function App() {
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <h3 className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/60">Vibe Check / Highlights</h3>
-              <a href="#photos" className="text-[10px] text-brand-yellow font-black uppercase tracking-widest hover:underline">View All</a>
+              <a href="#winners" className="text-[10px] text-brand-yellow font-black uppercase tracking-widest hover:underline">View All</a>
             </div>
             <div className="grid grid-cols-3 gap-3">
               {PHOTOS.slice(0, 3).map((src, idx) => (
@@ -890,7 +1107,14 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="group bg-black border border-white/10 hover:border-brand-yellow transition-all p-8 flex flex-col relative overflow-hidden"
+              onClick={() => {
+                if (event.status === 'closed') {
+                  handleViewPhotos(event);
+                }
+              }}
+              className={`group bg-black border border-white/10 hover:border-brand-yellow transition-all p-8 flex flex-col relative overflow-hidden ${
+                event.status === 'closed' ? 'cursor-pointer' : ''
+              }`}
             >
               <div className="absolute top-0 right-0 w-20 h-20 bg-brand-yellow/5 -mr-10 -mt-10 rotate-45 group-hover:bg-brand-yellow/20 transition-all pointer-events-none" />
               <div className="flex justify-between items-start mb-12">
@@ -915,29 +1139,36 @@ export default function App() {
               </div>
               
               <button 
-                onClick={() => event.status !== 'closed' && event.status !== 'soon' && handleSignup(event.title)}
-                disabled={event.status === 'closed' || event.status === 'soon'}
-                className={`mt-auto w-full py-4 border font-black uppercase text-[10px] tracking-[0.3em] transition-all ${
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (event.status === 'closed') {
+                    handleViewPhotos(event);
+                  } else if (event.status !== 'soon') {
+                    handleSignup(event.title);
+                  }
+                }}
+                disabled={event.status === 'soon'}
+                className={`mt-auto w-full py-4 border font-black uppercase text-[10px] tracking-[0.3em] transition-all cursor-pointer ${
                   event.status === 'closed' 
-                    ? 'border-white/10 text-white/20 cursor-not-allowed' 
+                    ? 'border-brand-yellow text-brand-yellow hover:bg-brand-yellow hover:text-black' 
                     : event.status === 'soon'
                     ? 'border-brand-yellow/30 text-brand-yellow/50 cursor-not-allowed'
                     : 'border-brand-yellow text-brand-yellow hover:bg-brand-yellow hover:text-black'
                 }`}
               >
-                {event.status === 'closed' ? 'REGISTRATIONS CLOSED' : event.status === 'soon' ? 'COMING SOON' : 'Assemble'}
+                {event.status === 'closed' ? 'VIEW PHOTOS' : event.status === 'soon' ? 'COMING SOON' : 'Assemble'}
               </button>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Gallery: The Archive */}
-      <section id="photos" className="py-32 px-6 md:px-24 border-b border-white/10">
+      {/* Gallery: The Winners */}
+      <section id="winners" className="py-32 px-6 md:px-24 border-b border-white/10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-          <SectionHeader title="THE ARCHIVE" subtitle="Moments" />
+          <SectionHeader title="THE WINNERS" subtitle="Champions" />
           <p className="max-w-xs text-brand-white/40 font-black uppercase tracking-[0.3em] text-[10px] text-right">
-            CAPTURED ON THE STREETS OF PUNE BY OUR ACTIVE COMMUNITY.
+            HONORING THE UNRELENTING CHAMPIONS OF OUR ACTIVE COMMUNITY.
           </p>
         </div>
         
