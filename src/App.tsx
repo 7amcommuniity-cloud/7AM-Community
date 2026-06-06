@@ -606,7 +606,7 @@ const EVENT_PHOTOS_MAPPING: Record<string, string[]> = {
   ],
   '7AM X THIRD WAVE SUNDAY RUN': [
     "https://lh3.googleusercontent.com/d/1v4LniqTg2LUOnm8WfXGLrwFgM8_8JoY2",
-    "https://unsplash.com/photos/h--EfqcinxE",
+    "IMG_2059.HEIC",
     "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1530143311094-34d807799e8f?auto=format&fit=crop&w=800&q=80"
   ],
