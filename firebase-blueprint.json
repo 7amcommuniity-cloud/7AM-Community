@@ -53,6 +53,18 @@
     "/event_murphies_sunday_reset/{registrationId}": {
       "schema": "Registration",
       "description": "New collection for Murphies Sunday Reset event registrations"
+    },
+    "/events_2026_new/{registrationId}": {
+      "schema": "Registration",
+      "description": "New collection for event registrations starting June 2026"
+    },
+    "/event_third_wave/{registrationId}": {
+      "schema": "Registration",
+      "description": "New collection for Third Wave Sunday Run event registrations"
+    },
+    "/event_kuti/{registrationId}": {
+      "schema": "Registration",
+      "description": "New collection for Kuti Coffee Run event registrations"
     }
   }
 }

@@ -115,5 +115,71 @@ service cloud.firestore {
           && data.registeredAt == request.time;
       }
     }
+
+    // --- New Registrations 2026 ---
+    match /events_2026_new/{registrationId} {
+      allow create: if isValidId(registrationId)
+        && isValidNewRegistration(incoming());
+      
+      allow list: if true;
+
+      function isValidNewRegistration(data) {
+        return data.keys().hasAll(['name', 'email', 'phone', 'gender', 'event', 'transactionId', 'createdAt', 'registeredAt', 'status'])
+          && data.keys().size() == 9
+          && data.name is string && data.name.size() > 0 && data.name.size() <= 100
+          && data.email is string && data.email.size() <= 100
+          && data.phone is string && data.phone.size() == 10
+          && data.gender is string && data.gender.size() <= 20
+          && data.event is string && data.event.size() <= 200
+          && data.transactionId is string && data.transactionId.size() > 0 && data.transactionId.size() <= 100
+          && data.status == 'pending'
+          && data.createdAt == request.time
+          && data.registeredAt == request.time;
+      }
+    }
+
+    // --- Third Wave Sunday Run Registrations ---
+    match /event_third_wave/{registrationId} {
+      allow create: if isValidId(registrationId)
+        && isValidNewRegistration(incoming());
+      
+      allow list: if true;
+
+      function isValidNewRegistration(data) {
+        return data.keys().hasAll(['name', 'email', 'phone', 'gender', 'event', 'transactionId', 'createdAt', 'registeredAt', 'status'])
+          && data.keys().size() == 9
+          && data.name is string && data.name.size() > 0 && data.name.size() <= 100
+          && data.email is string && data.email.size() <= 100
+          && data.phone is string && data.phone.size() == 10
+          && data.gender is string && data.gender.size() <= 20
+          && data.event is string && data.event.size() <= 200
+          && data.transactionId is string && data.transactionId.size() > 0 && data.transactionId.size() <= 100
+          && data.status == 'pending'
+          && data.createdAt == request.time
+          && data.registeredAt == request.time;
+      }
+    }
+
+    // --- Kuti Coffee Run Registrations ---
+    match /event_kuti/{registrationId} {
+      allow create: if isValidId(registrationId)
+        && isValidNewRegistration(incoming());
+      
+      allow list: if true;
+
+      function isValidNewRegistration(data) {
+        return data.keys().hasAll(['name', 'email', 'phone', 'gender', 'event', 'transactionId', 'createdAt', 'registeredAt', 'status'])
+          && data.keys().size() == 9
+          && data.name is string && data.name.size() > 0 && data.name.size() <= 100
+          && data.email is string && data.email.size() <= 100
+          && data.phone is string && data.phone.size() == 10
+          && data.gender is string && data.gender.size() <= 20
+          && data.event is string && data.event.size() <= 200
+          && data.transactionId is string && data.transactionId.size() > 0 && data.transactionId.size() <= 100
+          && data.status == 'pending'
+          && data.createdAt == request.time
+          && data.registeredAt == request.time;
+      }
+    }
   }
 }
