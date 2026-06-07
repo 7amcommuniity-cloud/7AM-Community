@@ -141,10 +141,10 @@ interface BlogPost {
 const EVENTS: Event[] = [
   {
     id: '4',
-    title: '7AM X MURPHIES BISTRO RUN',
+    title: '7AM X MURPHIES SUNDAY RESET',
     date: 'June 14, 2026',
     location: 'MURPHIES, PRABHAT ROAD',
-    time: '7:15 AM',
+    time: '7:00 AM',
     description: 'Lace up for our morning run ending at Murphies Bistro. Wake up, run intermediate miles, and connect over delicious brews.',
     difficulty: 'Intermediate',
     status: 'open'
@@ -154,7 +154,7 @@ const EVENTS: Event[] = [
     title: '7AM X STARBUCKS GRANDE RUN',
     date: 'May 31, 2026',
     location: 'Starbucks, Balewadi High Street',
-    time: '7:15 AM',
+    time: '7:00 AM',
     description: 'Lace up for our Sunday edition in collaboration with Starbucks. Wake up, run miles, and share a Grande brew.',
     difficulty: 'Intermediate',
     status: 'closed'
@@ -164,7 +164,7 @@ const EVENTS: Event[] = [
     title: '7AM X THIRD WAVE SUNDAY RUN',
     date: 'May 24, 2026',
     location: 'Third Wave Coffee, Aundh',
-    time: '7:15 AM',
+    time: '7:00 AM',
     description: 'A morning ritual in the heart of Aundh. Fuel your soul with miles and caffeine.',
     difficulty: 'Beginner',
     status: 'closed'
@@ -174,7 +174,7 @@ const EVENTS: Event[] = [
     title: '7 AM X Kuti Coffee Run',
     date: 'May 10, 2026',
     location: 'The Kuti Project, Balewadi High Street',
-    time: '7:15 AM',
+    time: '7:00 AM',
     description: 'Our flagship morning session. Every pace, every story. Meet us for the miles, stay for the brew.',
     difficulty: 'Beginner',
     status: 'closed'
@@ -187,7 +187,7 @@ const PHOTOS = [
   "https://lh3.googleusercontent.com/d/1v4LniqTg2LUOnm8WfXGLrwFgM8_8JoY2",
   "https://lh3.googleusercontent.com/d/1seBd9eaBurP2eXL-Hy5O5Wboxyh9iCIU",
   "https://lh3.googleusercontent.com/d/1PuuL5SQgTkUKk_xNzA4U7KYE_yVT4QKs",
-  "https://lh3.googleusercontent.com/d/1DjyEBN17WLCEI3i47VKCV3RDDgYaY7BJ"
+  "https://unsplash.com/photos/h--EfqcinxE/download"
 ];
 
 const BLOG_POSTS: BlogPost[] = [
@@ -357,7 +357,12 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
     if (!transactionId.trim()) return;
 
     setIsLoading(true);
-    const targetCollection = formData.event === '7AM X STARBUCKS GRANDE RUN' ? 'event_starbucks' : 'events_2025_new';
+    const targetCollection = 
+      formData.event === '7AM X STARBUCKS GRANDE RUN' 
+        ? 'event_starbucks' 
+        : formData.event === '7AM X MURPHIES SUNDAY RESET'
+        ? 'event_murphies_sunday_reset'
+        : 'events_2025_new';
     try {
       const registrationData = {
         ...formData,
@@ -430,7 +435,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                   <div className="bg-brand-yellow/10 border border-brand-yellow/30 py-2 md:py-3 px-4 md:px-6 rounded-xl inline-block">
                     <span className="text-white/60 uppercase tracking-widest text-[9px] md:text-xs font-bold mr-2">Registration Fee:</span>
                     <span className="text-2xl md:text-3xl font-black text-brand-yellow">
-                      ₹{['7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES BISTRO RUN'].includes(formData.event) ? '399' : '299'}
+                      ₹{['7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET'].includes(formData.event) ? '399' : '299'}
                     </span>
                   </div>
                 </div>
@@ -440,12 +445,12 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     <div className="absolute -inset-4 bg-brand-yellow/30 blur-2xl opacity-20 group-hover:opacity-50 transition duration-1000"></div>
                     <div className="relative bg-white p-3 md:p-4 rounded-xl shadow-[0_0_50px_rgba(255,255,0,0.2)] border-2 border-brand-yellow/30">
                       <img 
-                        src="/qr.jpeg" 
+                        src="https://lh3.googleusercontent.com/d/1l0TJkSDlM0X3XWXZdtc8gQahSf7gKvX-" 
                         alt="Payments QR" 
                         className="w-full h-full object-contain rounded-lg"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "/qr.jpeg"; 
+                          target.src = "input_file_9.png"; 
                         }}
                       />
                     </div>
@@ -599,13 +604,14 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
 
 const EVENT_PHOTOS_MAPPING: Record<string, string[]> = {
   '7AM X STARBUCKS GRANDE RUN': [
-    ttps://lh3.googleusercontent.com/d/1i-ObucK8vw5G7PgeFiWWWKLk5khKDyCj",
-    "https://images.unsplash.com/p"hhoto-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80",
+    "https://lh3.googleusercontent.com/d/1i-ObucK8vw5G7PgeFiWWWKLk5khKDyCj",
+    "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1486218119243-13883505764c?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"
   ],
   '7AM X THIRD WAVE SUNDAY RUN': [
     "https://lh3.googleusercontent.com/d/1v4LniqTg2LUOnm8WfXGLrwFgM8_8JoY2",
+    "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1530143311094-34d807799e8f?auto=format&fit=crop&w=800&q=80"
   ],
@@ -615,9 +621,9 @@ const EVENT_PHOTOS_MAPPING: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?auto=format&fit=crop&w=800&q=80"
   ],
-  '7AM X MURPHIES BISTRO RUN': [
+  '7AM X MURPHIES SUNDAY RESET': [
     "https://lh3.googleusercontent.com/d/1tIbM-yextF_rCuVxeZRMp0PdL1xHO5MF",
-    "https://lh3.googleusercontent.com/d/1DjyEBN17WLCEI3i47VKCV3RDDgYaY7BJ",
+    "https://unsplash.com/photos/h--EfqcinxE/download",
     "https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=800&q=80"
   ]
@@ -1137,26 +1143,34 @@ export default function App() {
                 {event.location}
               </div>
               
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (event.status === 'closed') {
-                    handleViewPhotos(event);
-                  } else if (event.status !== 'soon') {
-                    handleSignup(event.title);
-                  }
-                }}
-                disabled={event.status === 'soon'}
-                className={`mt-auto w-full py-4 border font-black uppercase text-[10px] tracking-[0.3em] transition-all cursor-pointer ${
-                  event.status === 'closed' 
-                    ? 'border-brand-yellow text-brand-yellow hover:bg-brand-yellow hover:text-black' 
-                    : event.status === 'soon'
-                    ? 'border-brand-yellow/30 text-brand-yellow/50 cursor-not-allowed'
-                    : 'border-brand-yellow text-brand-yellow hover:bg-brand-yellow hover:text-black'
-                }`}
-              >
-                {event.status === 'closed' ? 'VIEW PHOTOS' : event.status === 'soon' ? 'COMING SOON' : 'Assemble'}
-              </button>
+              <div className="mt-auto space-y-4">
+                {event.status === 'closed' && (
+                  <div className="text-[10px] text-red-500 font-extrabold uppercase tracking-[0.2em] flex items-center gap-1.5 justify-center">
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                    Registration Closed
+                  </div>
+                )}
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (event.status === 'closed') {
+                      handleViewPhotos(event);
+                    } else if (event.status !== 'soon') {
+                      handleSignup(event.title);
+                    }
+                  }}
+                  disabled={event.status === 'soon'}
+                  className={`w-full py-4 border font-black uppercase text-[10px] tracking-[0.3em] transition-all cursor-pointer ${
+                    event.status === 'closed' 
+                      ? 'border-brand-yellow text-brand-yellow hover:bg-brand-yellow hover:text-black' 
+                      : event.status === 'soon'
+                      ? 'border-brand-yellow/30 text-brand-yellow/50 cursor-not-allowed'
+                      : 'border-brand-yellow text-brand-yellow hover:bg-brand-yellow hover:text-black'
+                  }`}
+                >
+                  {event.status === 'closed' ? 'VIEW PHOTOS' : event.status === 'soon' ? 'COMING SOON' : 'Assemble'}
+                </button>
+              </div>
             </motion.div>
           ))}
         </div>

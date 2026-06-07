@@ -49,6 +49,10 @@
     "/event_starbucks/{registrationId}": {
       "schema": "Registration",
       "description": "New collection for Starbucks Grande Run event registrations"
+    },
+    "/event_murphies_sunday_reset/{registrationId}": {
+      "schema": "Registration",
+      "description": "New collection for Murphies Sunday Reset event registrations"
     }
   }
 }
