@@ -182,12 +182,8 @@ const EVENTS: Event[] = [
 ];
 
 const PHOTOS = [
-  "https://lh3.googleusercontent.com/d/1i-ObucK8vw5G7PgeFiWWWKLk5khKDyCj",
-  "https://lh3.googleusercontent.com/d/1tIbM-yextF_rCuVxeZRMp0PdL1xHO5MF",
-  "https://lh3.googleusercontent.com/d/1v4LniqTg2LUOnm8WfXGLrwFgM8_8JoY2",
-  "https://lh3.googleusercontent.com/d/1seBd9eaBurP2eXL-Hy5O5Wboxyh9iCIU",
-  "https://lh3.googleusercontent.com/d/1PuuL5SQgTkUKk_xNzA4U7KYE_yVT4QKs",
-  "https://unsplash.com/photos/h--EfqcinxE/download"
+  "https://i.pinimg.com/originals/81/c1/89/81c189873ae3f5b5a1e21da32c3206cb.jpg",
+  "https://i.pinimg.com/originals/f4/34/91/f43491b83f4251f41030a384984938ee.jpg"
 ];
 
 const BLOG_POSTS: BlogPost[] = [
@@ -450,11 +446,11 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     <div className="relative bg-white p-3 md:p-4 rounded-xl shadow-[0_0_50px_rgba(255,255,0,0.2)] border-2 border-brand-yellow/30">
                       <img 
                         src="https://lh3.googleusercontent.com/d/1l0TJkSDlM0X3XWXZdtc8gQahSf7gKvX-" 
-                        alt="/qr.jpeg" 
+                        alt="Payments QR" 
                         className="w-full h-full object-contain rounded-lg"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "/qr.jpeg"; 
+                          target.src = "input_file_9.png"; 
                         }}
                       />
                     </div>
@@ -901,9 +897,9 @@ export default function App() {
   const navItems = [
     { label: 'ABOUT', id: 'about' },
     { label: 'EVENTS', id: 'events' },
+    { label: 'HIGHLIGHTS', id: 'highlights' },
     { label: 'WHATSAPP', id: 'whatsapp' },
     { label: 'COLLAB', id: 'collab' },
-    { label: 'WINNERS', id: 'winners' },
     { label: 'CONTACT', id: 'contact' }
   ];
 
@@ -1079,11 +1075,11 @@ export default function App() {
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <h3 className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/60">Vibe Check / Highlights</h3>
-              <a href="#winners" className="text-[10px] text-brand-yellow font-black uppercase tracking-widest hover:underline">View All</a>
+              <a href="#highlights" className="text-[10px] text-brand-yellow font-black uppercase tracking-widest hover:underline">View All</a>
             </div>
             <div className="grid grid-cols-3 gap-3">
               {PHOTOS.slice(0, 3).map((src, idx) => (
-                <div key={idx} className="bg-zinc-800 grayscale hover:grayscale-0 transition-all border border-white/10 overflow-hidden cursor-crosshair aspect-square">
+                <div key={idx} className="bg-zinc-800 border border-white/10 overflow-hidden cursor-crosshair aspect-square">
                    <img src={src} className="w-full h-full object-cover transition-transform hover:scale-110" />
                 </div>
               ))}
@@ -1212,12 +1208,12 @@ export default function App() {
         </div>
       </section>
 
-      {/* Gallery: The Winners */}
-      <section id="winners" className="py-32 px-6 md:px-24 border-b border-white/10">
+      {/* Gallery: The Highlights */}
+      <section id="highlights" className="py-32 px-6 md:px-24 border-b border-white/10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-          <SectionHeader title="THE WINNERS" subtitle="Champions" />
+          <SectionHeader title="THE HIGHLIGHTS" subtitle="Moments" />
           <p className="max-w-xs text-brand-white/40 font-black uppercase tracking-[0.3em] text-[10px] text-right">
-            HONORING THE UNRELENTING CHAMPIONS OF OUR ACTIVE COMMUNITY.
+            CAPTURING THE MOST MEMORABLE MOMENTS OF OUR ACTIVE COMMUNITY.
           </p>
         </div>
         
@@ -1231,7 +1227,7 @@ export default function App() {
               viewport={{ once: true }}
               className="relative aspect-square group overflow-hidden border border-white/10 bg-[#111]"
             >
-              <img src={src} alt="Past event" className="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105" />
+              <img src={src} alt="Past event" className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="absolute top-4 right-4 bg-brand-yellow p-2 opacity-0 group-hover:opacity-100 transition-all">
                 <Camera size={16} className="text-black" />
@@ -1240,6 +1236,7 @@ export default function App() {
           ))}
         </div>
       </section>
+
 
       {/* WhatsApp Community: The Pulse */}
       <section id="whatsapp" className="py-20 md:py-32 px-6 md:px-24 border-b border-white/10 bg-brand-yellow/5 relative overflow-hidden">
