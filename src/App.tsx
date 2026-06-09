@@ -449,12 +449,12 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     <div className="absolute -inset-4 bg-brand-yellow/30 blur-2xl opacity-20 group-hover:opacity-50 transition duration-1000"></div>
                     <div className="relative bg-white p-3 md:p-4 rounded-xl shadow-[0_0_50px_rgba(255,255,0,0.2)] border-2 border-brand-yellow/30">
                       <img 
-                        src="/qr.jpeg" 
+                        src="https://lh3.googleusercontent.com/d/1l0TJkSDlM0X3XWXZdtc8gQahSf7gKvX-" 
                         alt="Payments QR" 
                         className="w-full h-full object-contain rounded-lg"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "/qr.jpeg"; 
+                          target.src = "input_file_9.png"; 
                         }}
                       />
                     </div>
@@ -608,10 +608,22 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
 
 const EVENT_PHOTOS_MAPPING: Record<string, string[]> = {
   '7AM X STARBUCKS GRANDE RUN': [
-    "https://lh3.googleusercontent.com/d/1i-ObucK8vw5G7PgeFiWWWKLk5khKDyCj",
-    "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1486218119243-13883505764c?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"
+    "https://i.pinimg.com/originals/83/2b/e4/832be4f622a4eb186f87c3369a404193.jpg",
+    "https://i.pinimg.com/originals/86/6b/b4/866bb4a737e19593cef60e7166f1bfbd.jpg",
+    "https://i.pinimg.com/originals/da/71/1b/da711b0759e4166a0f7f3f3cc853df18.jpg",
+    "https://i.pinimg.com/originals/67/52/a9/6752a9926e88d6ce84d6ab454433e829.jpg",
+    "https://i.pinimg.com/originals/2e/e0/80/2ee08090d682cd4500a87b64564e7655.jpg",
+    "https://i.pinimg.com/originals/85/04/42/8504425289023d5e28ada3d3ea1d7dbe.jpg",
+    "https://i.pinimg.com/originals/5d/3d/a2/5d3da22e7fdbf3338f6c6bbbe25e1386.jpg",
+    "https://i.pinimg.com/originals/e9/4b/6a/e94b6a40ed23ed7352fcc6aaa1b8df1b.jpg",
+    "https://i.pinimg.com/originals/b1/a5/fa/b1a5fa5736b7cdd79115acc83145d471.jpg",
+    "https://i.pinimg.com/originals/e6/36/1b/e6361b25f217ff8accf8a8024a0ca7db.jpg",
+    "https://i.pinimg.com/originals/e6/ed/b2/e6edb2e19302e6d5be4bb0adcea75c8f.jpg",
+    "https://i.pinimg.com/originals/3d/b4/8a/3db48a500ca8d54ff8977955aeca03d2.jpg",
+    "https://i.pinimg.com/originals/81/c1/89/81c189873ae3f5b5a1e21da32c3206cb.jpg",
+    "https://i.pinimg.com/originals/72/81/d7/7281d7cadfbcc4999899a08b5e2572f9.jpg",
+    "https://i.pinimg.com/originals/87/0a/84/870a8426881da86097fc80c94df3f87d.jpg",
+    "https://i.pinimg.com/originals/45/78/d7/4578d75982ea4ecb90c616f64f70cba7.jpg"
   ],
   '7AM X THIRD WAVE SUNDAY RUN': [
     "https://i.pinimg.com/originals/f4/34/91/f43491b83f4251f41030a384984938ee.jpg",
