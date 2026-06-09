@@ -450,11 +450,11 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     <div className="relative bg-white p-3 md:p-4 rounded-xl shadow-[0_0_50px_rgba(255,255,0,0.2)] border-2 border-brand-yellow/30">
                       <img 
                         src="https://lh3.googleusercontent.com/d/1l0TJkSDlM0X3XWXZdtc8gQahSf7gKvX-" 
-                        alt="/qr.jpeg" 
+                        alt="Payments QR" 
                         className="w-full h-full object-contain rounded-lg"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "/qr.jpeg"; 
+                          target.src = "input_file_9.png"; 
                         }}
                       />
                     </div>
@@ -614,21 +614,36 @@ const EVENT_PHOTOS_MAPPING: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80"
   ],
   '7AM X THIRD WAVE SUNDAY RUN': [
-    "https://unsplash.com/photos/h--EfqcinxE/download",
-    "https://unsplash.com/photos/18zy9bqZ1_w/download",
-    "https://unsplash.com/photos/pE9TjHL3BhE/download",
-    "https://unsplash.com/photos/ZU0-A_K6zik/download",
-    "https://unsplash.com/photos/KNNpxil1yTU/download",
-    "https://unsplash.com/photos/niv7g294zeE/download",
-    "https://unsplash.com/photos/IIFsq0P0ARY/download",
-    "https://unsplash.com/photos/Tz-rgazdvtI/download",
-    "https://unsplash.com/photos/3x0eqqctA6c/download"
+    "https://i.pinimg.com/originals/f4/34/91/f43491b83f4251f41030a384984938ee.jpg",
+    "https://i.pinimg.com/originals/8d/d1/17/8dd117ee2c6b2a7fa36f15e9f4857bfe.jpg",
+    "https://i.pinimg.com/originals/86/78/fb/8678fb20358f49afebb448fc269e13e2.jpg",
+    "https://i.pinimg.com/originals/68/34/34/68343456de0d16f3ddbbdb2f1880e5f7.jpg",
+    "https://i.pinimg.com/originals/44/e8/f5/44e8f516467a847ef0a174a612ec2dd9.jpg",
+    "https://i.pinimg.com/originals/bf/e4/2e/bfe42ed307aececf50743c934064bb0d.jpg",
+    "https://i.pinimg.com/originals/94/8a/62/948a6223eacb7de048f68b3877cde93c.jpg",
+    "https://i.pinimg.com/originals/bc/9b/ba/bc9bba542f38508163e16b98d93776d8.jpg"
   ],
   '7 AM X Kuti Coffee Run': [
-    "https://lh3.googleusercontent.com/d/1seBd9eaBurP2eXL-Hy5O5Wboxyh9iCIU",
-    "https://lh3.googleusercontent.com/d/1PuuL5SQgTkUKk_xNzA4U7KYE_yVT4QKs",
-    "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?auto=format&fit=crop&w=800&q=80"
+    "https://i.pinimg.com/originals/c4/db/5f/c4db5f0c7047176a9c0138e76e791e96.jpg",
+    "https://i.pinimg.com/originals/cd/95/5c/cd955c7a680c36aebd0e2089bee14f0c.jpg",
+    "https://i.pinimg.com/originals/73/ff/19/73ff195e2e7918ff20a6cd5d3c8e416a.jpg",
+    "https://i.pinimg.com/originals/39/01/b7/3901b74c3b1f2257a4b3acf5ee82469f.jpg",
+    "https://i.pinimg.com/originals/d5/49/ea/d549eaade0b7cefd9a66fe2859891af0.jpg",
+    "https://i.pinimg.com/originals/f5/c5/52/f5c552ac6baf3f62b6dc337d19d22aec.jpg",
+    "https://i.pinimg.com/originals/36/28/fd/3628fd3c7dc4695d505374462201072f.jpg",
+    "https://i.pinimg.com/originals/a3/9e/85/a39e85982d51b34a60049128b388f489.jpg",
+    "https://i.pinimg.com/originals/fb/51/e5/fb51e57a19c4f180f27f161d7d0c7d21.jpg",
+    "https://i.pinimg.com/originals/91/19/12/91191262795c90aa29e41093576a7d09.jpg",
+    "https://i.pinimg.com/originals/10/3e/6e/103e6ec729cdce33ecbeef0b3cf64c2c.jpg",
+    "https://i.pinimg.com/originals/05/40/50/05405038c4c49faf7fab925d9a024385.jpg",
+    "https://i.pinimg.com/originals/62/f1/02/62f102c0cde0ff8c86590c59c48e541a.jpg",
+    "https://i.pinimg.com/originals/50/cd/18/50cd18410d62a74ba5802691e9f08666.jpg",
+    "https://i.pinimg.com/originals/0c/bf/66/0cbf6691feff1acd42d22eb51a7a169c.jpg",
+    "https://i.pinimg.com/originals/fa/9e/64/fa9e645463acf5665a3ed88936ef3f82.jpg",
+    "https://i.pinimg.com/originals/4f/73/a3/4f73a3fae0d7143da73cbf57fb897593.jpg",
+    "https://i.pinimg.com/originals/7c/2f/b0/7c2fb05442cd8352216456ce1e9b7f0e.jpg",
+    "https://i.pinimg.com/originals/bc/cf/9d/bccf9d1bf2cc9031210b7b566b7e426a.jpg",
+    "https://i.pinimg.com/originals/e5/f0/57/e5f057a547bb533f5302a6d8161a4e3d.jpg"
   ],
   '7AM X MURPHIES SUNDAY RESET': [
     "https://lh3.googleusercontent.com/d/1tIbM-yextF_rCuVxeZRMp0PdL1xHO5MF",
