@@ -147,7 +147,7 @@ const EVENTS: Event[] = [
     time: '7:00 AM',
     description: 'Lace up for our morning run ending at Murphies Bistro. Wake up, run intermediate miles, and connect over delicious brews.',
     difficulty: 'Intermediate',
-    status: 'open'
+    status: 'closed'
   },
   {
     id: '3',
@@ -446,11 +446,11 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     <div className="relative bg-white p-3 md:p-4 rounded-xl shadow-[0_0_50px_rgba(255,255,0,0.2)] border-2 border-brand-yellow/30">
                       <img 
                         src="https://lh3.googleusercontent.com/d/1l0TJkSDlM0X3XWXZdtc8gQahSf7gKvX-" 
-                        alt="/qr.jpeg" 
+                        alt="Payments QR" 
                         className="w-full h-full object-contain rounded-lg"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "/qr.jpeg"; 
+                          target.src = "input_file_9.png"; 
                         }}
                       />
                     </div>
