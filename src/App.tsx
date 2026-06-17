@@ -420,22 +420,37 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
             </button>
             
             {step === 'confirmed' ? (
-              <div className="text-center py-10 md:py-16">
+              <div className="text-center py-8 md:py-12 space-y-8">
                 <motion.div
                   initial={{ scale: 0, rotate: -180 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ type: 'spring', damping: 10 }}
-                  className="w-20 h-20 md:w-24 md:h-24 bg-brand-yellow rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg shadow-brand-yellow/30"
+                  className="w-20 h-20 bg-brand-yellow rounded-full flex items-center justify-center mx-auto shadow-lg shadow-brand-yellow/20"
                 >
                   <Send className="text-brand-black" size={32} />
                 </motion.div>
-                <h3 className="text-3xl md:text-4xl font-display font-black mb-4 tracking-tighter uppercase leading-tight">Registration Confirmed</h3>
-                <p className="text-brand-white/50 text-base md:text-lg uppercase tracking-widest font-bold">You're in the ranks. See you at the finish line.</p>
+                
+                <div className="space-y-4">
+                  <h3 className="text-3xl md:text-4xl font-display font-black tracking-tighter uppercase leading-none text-brand-yellow">
+                    REGISTRATION CONFIRMED
+                  </h3>
+                  <p className="text-brand-white/80 text-sm md:text-base uppercase tracking-wider font-bold max-w-md mx-auto leading-relaxed">
+                    You will receive your ticket in your mail.
+                  </p>
+                  <p className="text-brand-white/30 text-[9px] uppercase tracking-widest font-bold">
+                    Synced with Firebase securely
+                  </p>
+                </div>
+
+                <p className="text-brand-white/50 text-xs uppercase tracking-widest font-black text-center pt-2">
+                  YOU'RE IN THE RANKS. SEE YOU AT THE START LINE.
+                </p>
+
                 <button 
                   onClick={onClose}
-                  className="mt-10 md:mt-12 w-full py-4 border border-brand-yellow text-brand-yellow font-black uppercase tracking-widest text-xs hover:bg-brand-yellow hover:text-brand-black transition-all"
+                  className="w-full py-4 bg-brand-yellow text-brand-black font-black uppercase tracking-widest text-xs hover:bg-white hover:scale-[1.02] transition-all"
                 >
-                  Close Intel
+                  Close intel
                 </button>
               </div>
             ) : step === 'pay' ? (
@@ -459,12 +474,12 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     <div className="absolute -inset-4 bg-brand-yellow/30 blur-2xl opacity-20 group-hover:opacity-50 transition duration-1000"></div>
                     <div className="relative bg-white p-3 md:p-4 rounded-xl shadow-[0_0_50px_rgba(255,255,0,0.2)] border-2 border-brand-yellow/30">
                       <img 
-                        src="/qr.jpeg" 
+                        src="https://lh3.googleusercontent.com/d/1l0TJkSDlM0X3XWXZdtc8gQahSf7gKvX-" 
                         alt="Payments QR" 
                         className="w-full h-full object-contain rounded-lg"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "/qr.jpeg"; 
+                          target.src = "input_file_9.png"; 
                         }}
                       />
                     </div>
