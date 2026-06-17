@@ -127,6 +127,7 @@ interface Event {
   description: string;
   difficulty: "Beginner" | "Intermediate" | "Advanced";
   status?: EventStatus;
+  price?: number;
 }
 
 interface BlogPost {
@@ -139,6 +140,17 @@ interface BlogPost {
 
 // --- Data ---
 const EVENTS: Event[] = [
+  {
+    id: '5',
+    title: '7AM X SORA SUNRISE RUN',
+    date: 'June 21, 2026',
+    location: 'FC Road',
+    time: '7:00 AM',
+    description: 'Rise with the sun and run through the iconic FC Road. Fuel your morning with dynamic miles, scenic views, and reconnecting with the community at SORA over delicious brews.',
+    difficulty: 'Intermediate',
+    status: 'open',
+    price: 399
+  },
   {
     id: '4',
     title: '7AM X MURPHIES SUNDAY RESET',
@@ -358,6 +370,8 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
         ? 'event_starbucks' 
         : formData.event === '7AM X MURPHIES SUNDAY RESET'
         ? 'event_murphies_sunday_reset'
+        : formData.event === '7AM X SORA SUNRISE RUN'
+        ? 'sora_sunrise_run'
         : formData.event === '7AM X THIRD WAVE SUNDAY RUN'
         ? 'event_third_wave'
         : formData.event === '7 AM X Kuti Coffee Run'
@@ -435,7 +449,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                   <div className="bg-brand-yellow/10 border border-brand-yellow/30 py-2 md:py-3 px-4 md:px-6 rounded-xl inline-block">
                     <span className="text-white/60 uppercase tracking-widest text-[9px] md:text-xs font-bold mr-2">Registration Fee:</span>
                     <span className="text-2xl md:text-3xl font-black text-brand-yellow">
-                      ₹{['7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET'].includes(formData.event) ? '399' : '299'}
+                      ₹{currentEvent?.price ? currentEvent.price : ['7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET', '7AM X SORA SUNRISE RUN'].includes(formData.event) ? '399' : '299'}
                     </span>
                   </div>
                 </div>

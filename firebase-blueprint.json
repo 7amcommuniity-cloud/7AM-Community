@@ -65,6 +65,10 @@
     "/event_kuti/{registrationId}": {
       "schema": "Registration",
       "description": "New collection for Kuti Coffee Run event registrations"
+    },
+    "/sora_sunrise_run/{registrationId}": {
+      "schema": "Registration",
+      "description": "New collection for 7AM X SORA SUNRISE RUN event registrations"
     }
   }
 }
