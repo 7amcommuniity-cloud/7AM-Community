@@ -69,6 +69,10 @@
     "/sora_sunrise_run/{registrationId}": {
       "schema": "Registration",
       "description": "New collection for 7AM X SORA SUNRISE RUN event registrations"
+    },
+    "/kiosk_kaffee_rythm_run/{registrationId}": {
+      "schema": "Registration",
+      "description": "New collection for 7AM X KIOSK KAFFEE RYTHM & RUN event registrations"
     }
   }
 }
