@@ -14,6 +14,20 @@ service cloud.firestore {
       return request.resource.data;
     }
 
+    function isValidNewRegistration(data) {
+      return data.keys().hasAll(['name', 'email', 'phone', 'gender', 'event', 'transactionId', 'createdAt', 'registeredAt', 'status'])
+        && data.keys().size() == 9
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 100
+        && data.email is string && data.email.size() <= 100
+        && data.phone is string && data.phone.size() >= 10 && data.phone.size() <= 15
+        && data.gender is string && data.gender.size() <= 20
+        && data.event is string && data.event.size() <= 200
+        && data.transactionId is string && data.transactionId.size() > 0 && data.transactionId.size() <= 100
+        && data.status == 'pending'
+        && data.createdAt == request.time
+        && data.registeredAt == request.time;
+    }
+
     // --- Enquiries ---
     match /enquiries/{enquiryId} {
       allow create: if isValidId(enquiryId) 
@@ -54,22 +68,7 @@ service cloud.firestore {
       allow create: if isValidId(registrationId)
         && isValidNewRegistration(incoming());
       
-      // Allow list for ordering verification (if added later)
       allow list: if true; 
-
-      function isValidNewRegistration(data) {
-        return data.keys().hasAll(['name', 'email', 'phone', 'gender', 'event', 'transactionId', 'createdAt', 'registeredAt', 'status'])
-          && data.keys().size() == 9
-          && data.name is string && data.name.size() > 0 && data.name.size() <= 100
-          && data.email is string && data.email.size() <= 100
-          && data.phone is string && data.phone.size() >= 10 && data.phone.size() <= 15
-          && data.gender is string && data.gender.size() <= 20
-          && data.event is string && data.event.size() <= 200
-          && data.transactionId is string && data.transactionId.size() > 0 && data.transactionId.size() <= 100
-          && data.status == 'pending'
-          && data.createdAt == request.time
-          && data.registeredAt == request.time;
-      }
     }
 
     // --- Starbucks Grande Run Registrations ---
@@ -78,20 +77,6 @@ service cloud.firestore {
         && isValidNewRegistration(incoming());
       
       allow list: if true;
-
-      function isValidNewRegistration(data) {
-        return data.keys().hasAll(['name', 'email', 'phone', 'gender', 'event', 'transactionId', 'createdAt', 'registeredAt', 'status'])
-          && data.keys().size() == 9
-          && data.name is string && data.name.size() > 0 && data.name.size() <= 100
-          && data.email is string && data.email.size() <= 100
-          && data.phone is string && data.phone.size() >= 10 && data.phone.size() <= 15
-          && data.gender is string && data.gender.size() <= 20
-          && data.event is string && data.event.size() <= 200
-          && data.transactionId is string && data.transactionId.size() > 0 && data.transactionId.size() <= 100
-          && data.status == 'pending'
-          && data.createdAt == request.time
-          && data.registeredAt == request.time;
-      }
     }
 
     // --- Murphies Sunday Reset Registrations ---
@@ -100,20 +85,6 @@ service cloud.firestore {
         && isValidNewRegistration(incoming());
       
       allow list: if true;
-
-      function isValidNewRegistration(data) {
-        return data.keys().hasAll(['name', 'email', 'phone', 'gender', 'event', 'transactionId', 'createdAt', 'registeredAt', 'status'])
-          && data.keys().size() == 9
-          && data.name is string && data.name.size() > 0 && data.name.size() <= 100
-          && data.email is string && data.email.size() <= 100
-          && data.phone is string && data.phone.size() >= 10 && data.phone.size() <= 15
-          && data.gender is string && data.gender.size() <= 20
-          && data.event is string && data.event.size() <= 200
-          && data.transactionId is string && data.transactionId.size() > 0 && data.transactionId.size() <= 100
-          && data.status == 'pending'
-          && data.createdAt == request.time
-          && data.registeredAt == request.time;
-      }
     }
 
     // --- New Registrations 2026 ---
@@ -122,20 +93,6 @@ service cloud.firestore {
         && isValidNewRegistration(incoming());
       
       allow list: if true;
-
-      function isValidNewRegistration(data) {
-        return data.keys().hasAll(['name', 'email', 'phone', 'gender', 'event', 'transactionId', 'createdAt', 'registeredAt', 'status'])
-          && data.keys().size() == 9
-          && data.name is string && data.name.size() > 0 && data.name.size() <= 100
-          && data.email is string && data.email.size() <= 100
-          && data.phone is string && data.phone.size() >= 10 && data.phone.size() <= 15
-          && data.gender is string && data.gender.size() <= 20
-          && data.event is string && data.event.size() <= 200
-          && data.transactionId is string && data.transactionId.size() > 0 && data.transactionId.size() <= 100
-          && data.status == 'pending'
-          && data.createdAt == request.time
-          && data.registeredAt == request.time;
-      }
     }
 
     // --- Third Wave Sunday Run Registrations ---
@@ -144,20 +101,6 @@ service cloud.firestore {
         && isValidNewRegistration(incoming());
       
       allow list: if true;
-
-      function isValidNewRegistration(data) {
-        return data.keys().hasAll(['name', 'email', 'phone', 'gender', 'event', 'transactionId', 'createdAt', 'registeredAt', 'status'])
-          && data.keys().size() == 9
-          && data.name is string && data.name.size() > 0 && data.name.size() <= 100
-          && data.email is string && data.email.size() <= 100
-          && data.phone is string && data.phone.size() >= 10 && data.phone.size() <= 15
-          && data.gender is string && data.gender.size() <= 20
-          && data.event is string && data.event.size() <= 200
-          && data.transactionId is string && data.transactionId.size() > 0 && data.transactionId.size() <= 100
-          && data.status == 'pending'
-          && data.createdAt == request.time
-          && data.registeredAt == request.time;
-      }
     }
 
     // --- Kuti Coffee Run Registrations ---
@@ -166,20 +109,6 @@ service cloud.firestore {
         && isValidNewRegistration(incoming());
       
       allow list: if true;
-
-      function isValidNewRegistration(data) {
-        return data.keys().hasAll(['name', 'email', 'phone', 'gender', 'event', 'transactionId', 'createdAt', 'registeredAt', 'status'])
-          && data.keys().size() == 9
-          && data.name is string && data.name.size() > 0 && data.name.size() <= 100
-          && data.email is string && data.email.size() <= 100
-          && data.phone is string && data.phone.size() >= 10 && data.phone.size() <= 15
-          && data.gender is string && data.gender.size() <= 20
-          && data.event is string && data.event.size() <= 200
-          && data.transactionId is string && data.transactionId.size() > 0 && data.transactionId.size() <= 100
-          && data.status == 'pending'
-          && data.createdAt == request.time
-          && data.registeredAt == request.time;
-      }
     }
 
     // --- Sora Sunrise Run Registrations ---
@@ -188,20 +117,6 @@ service cloud.firestore {
         && isValidNewRegistration(incoming());
       
       allow list: if true;
-
-      function isValidNewRegistration(data) {
-        return data.keys().hasAll(['name', 'email', 'phone', 'gender', 'event', 'transactionId', 'createdAt', 'registeredAt', 'status'])
-          && data.keys().size() == 9
-          && data.name is string && data.name.size() > 0 && data.name.size() <= 100
-          && data.email is string && data.email.size() <= 100
-          && data.phone is string && data.phone.size() >= 10 && data.phone.size() <= 15
-          && data.gender is string && data.gender.size() <= 20
-          && data.event is string && data.event.size() <= 200
-          && data.transactionId is string && data.transactionId.size() > 0 && data.transactionId.size() <= 100
-          && data.status == 'pending'
-          && data.createdAt == request.time
-          && data.registeredAt == request.time;
-      }
     }
 
     // --- Kiosk Kaffee Rhythm Run Registrations ---
@@ -210,20 +125,14 @@ service cloud.firestore {
         && isValidNewRegistration(incoming());
       
       allow list: if true;
+    }
 
-      function isValidNewRegistration(data) {
-        return data.keys().hasAll(['name', 'email', 'phone', 'gender', 'event', 'transactionId', 'createdAt', 'registeredAt', 'status'])
-          && data.keys().size() == 9
-          && data.name is string && data.name.size() > 0 && data.name.size() <= 100
-          && data.email is string && data.email.size() <= 100
-          && data.phone is string && data.phone.size() >= 10 && data.phone.size() <= 15
-          && data.gender is string && data.gender.size() <= 20
-          && data.event is string && data.event.size() <= 200
-          && data.transactionId is string && data.transactionId.size() > 0 && data.transactionId.size() <= 100
-          && data.status == 'pending'
-          && data.createdAt == request.time
-          && data.registeredAt == request.time;
-      }
+    // --- Sante Fifa Run Registrations ---
+    match /sante_run/{registrationId} {
+      allow create: if isValidId(registrationId)
+        && isValidNewRegistration(incoming());
+      
+      allow list: if true;
     }
   }
 }

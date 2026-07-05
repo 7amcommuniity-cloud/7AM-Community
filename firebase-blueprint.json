@@ -73,6 +73,10 @@
     "/kiosk_kaffee_rythm_run/{registrationId}": {
       "schema": "Registration",
       "description": "New collection for 7AM X KIOSK KAFFEE RYTHM & RUN event registrations"
+    },
+    "/sante_run/{registrationId}": {
+      "schema": "Registration",
+      "description": "New collection for 7AM X SANTE FIFA RUN event registrations"
     }
   }
 }

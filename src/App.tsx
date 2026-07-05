@@ -141,6 +141,17 @@ interface BlogPost {
 // --- Data ---
 const EVENTS: Event[] = [
   {
+    id: '7',
+    title: '7AM X SANTE FIFA RUN',
+    date: 'July 12, 2026',
+    location: 'SANTE, BANER',
+    time: '7:00 AM',
+    description: 'A spectacular morning run followed by high energy vibes at Sante, Baner. Wake up, fuel your Sunday with dynamic miles, and celebrate with the active community.',
+    difficulty: 'Intermediate',
+    status: 'open',
+    price: 449
+  },
+  {
     id: '6',
     title: '7AM X KIOSK KAFFEE RYTHM & RUN',
     date: 'June 28, 2026',
@@ -385,6 +396,8 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
         ? 'sora_sunrise_run'
         : formData.event === '7AM X KIOSK KAFFEE RYTHM & RUN'
         ? 'kiosk_kaffee_rythm_run'
+        : formData.event === '7AM X SANTE FIFA RUN'
+        ? 'sante_run'
         : formData.event === '7AM X THIRD WAVE SUNDAY RUN'
         ? 'event_third_wave'
         : formData.event === '7 AM X Kuti Coffee Run'
@@ -448,7 +461,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     REGISTRATION CONFIRMED
                   </h3>
                   <p className="text-brand-white/80 text-sm md:text-base uppercase tracking-wider font-bold max-w-md mx-auto leading-relaxed">
-                    You will get the ticket in your mail 12 hours prior from the run.
+                    You will get the ticket in your mail. The ticket will be sent 12 hours prior to the run.
                   </p>
                 </div>
 
@@ -474,7 +487,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                   <div className="bg-brand-yellow/10 border border-brand-yellow/30 py-2 md:py-3 px-4 md:px-6 rounded-xl inline-block">
                     <span className="text-white/60 uppercase tracking-widest text-[9px] md:text-xs font-bold mr-2">Registration Fee:</span>
                     <span className="text-2xl md:text-3xl font-black text-brand-yellow">
-                      ₹{currentEvent?.price ? currentEvent.price : ['7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET', '7AM X SORA SUNRISE RUN', '7AM X KIOSK KAFFEE RYTHM & RUN'].includes(formData.event) ? '399' : '299'}
+                      ₹{currentEvent?.price ? currentEvent.price : ['7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET', '7AM X SORA SUNRISE RUN', '7AM X KIOSK KAFFEE RYTHM & RUN'].includes(formData.event) ? '399' : formData.event === '7AM X SANTE FIFA RUN' ? '449' : '299'}
                     </span>
                   </div>
                 </div>
