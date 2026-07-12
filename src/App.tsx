@@ -148,7 +148,7 @@ const EVENTS: Event[] = [
     time: '7:00 AM',
     description: 'A spectacular morning run followed by high energy vibes at Sante, Baner. Wake up, fuel your Sunday with dynamic miles, and celebrate with the active community.',
     difficulty: 'Intermediate',
-    status: 'open',
+    status: 'closed',
     price: 449
   },
   {
@@ -497,12 +497,12 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     <div className="absolute -inset-4 bg-brand-yellow/30 blur-2xl opacity-20 group-hover:opacity-50 transition duration-1000"></div>
                     <div className="relative bg-white p-3 md:p-4 rounded-xl shadow-[0_0_50px_rgba(255,255,0,0.2)] border-2 border-brand-yellow/30">
                       <img 
-                        src="/qr.jpeg" 
+                        src="https://lh3.googleusercontent.com/d/1l0TJkSDlM0X3XWXZdtc8gQahSf7gKvX-" 
                         alt="Payments QR" 
                         className="w-full h-full object-contain rounded-lg"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "qr.jpeg"; 
+                          target.src = "input_file_9.png"; 
                         }}
                       />
                     </div>
