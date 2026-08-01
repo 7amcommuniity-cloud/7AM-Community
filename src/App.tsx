@@ -372,6 +372,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
     email: '',
     phone: '',
     gender: '',
+    age: '',
     event: (selectedEvent && openEvents.some(e => e.title === selectedEvent)) ? selectedEvent : defaultEventTitle
   });
   const [transactionId, setTransactionId] = useState('');
@@ -387,7 +388,14 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
       setStep('register');
       const openEvts = EVENTS.filter(e => e.status === 'open');
       const initialEvt = (selectedEvent && openEvts.some(e => e.title === selectedEvent)) ? selectedEvent : (openEvts[0]?.title || EVENTS[0].title);
-      setFormData(prev => ({ ...prev, event: initialEvt }));
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        gender: '',
+        age: '',
+        event: initialEvt
+      });
       setTransactionId('');
       setIsLoading(false);
     }
@@ -515,12 +523,12 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     <div className="absolute -inset-4 bg-brand-yellow/30 blur-2xl opacity-20 group-hover:opacity-50 transition duration-1000"></div>
                     <div className="relative bg-white p-3 md:p-4 rounded-xl shadow-[0_0_50px_rgba(255,255,0,0.2)] border-2 border-brand-yellow/30">
                       <img 
-                        src="/qr.png" 
+                        src="https://lh3.googleusercontent.com/d/1l0TJkSDlM0X3XWXZdtc8gQahSf7gKvX-" 
                         alt="Payments QR" 
                         className="w-full h-full object-contain rounded-lg"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "/qr.png"; 
+                          target.src = "input_file_9.png"; 
                         }}
                       />
                     </div>
@@ -609,6 +617,22 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                       )}
                     </div>
                     <div className="space-y-2">
+                      <label className="block text-[10px] uppercase tracking-[0.2em] text-brand-white/40 font-bold">Age</label>
+                      <input 
+                        required 
+                        type="number" 
+                        min="1"
+                        max="120"
+                        value={formData.age}
+                        onChange={(e) => setFormData({...formData, age: e.target.value})}
+                        className="w-full bg-white/5 border-b-2 border-white/10 p-4 focus:border-brand-yellow outline-none transition-all text-lg font-medium"
+                        placeholder="e.g. 24"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
                       <label className="block text-[10px] uppercase tracking-[0.2em] text-brand-white/40 font-bold">Gender</label>
                       <div className="relative">
                         <select 
@@ -625,39 +649,39 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                         <ChevronRight className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 text-brand-yellow pointer-events-none" />
                       </div>
                     </div>
-                  </div>
 
-                  <div className="space-y-2">
-                    <label className="block text-[10px] uppercase tracking-[0.2em] text-brand-white/40 font-bold">Select Event</label>
-                    <div className="relative">
-                      <select 
-                        required
-                        value={formData.event}
-                        onChange={(e) => setFormData({...formData, event: e.target.value})}
-                        className={`w-full bg-white/5 border-b-2 p-4 outline-none transition-all text-lg font-medium appearance-none cursor-pointer ${isClosed ? 'border-red-500/50' : isSoon ? 'border-brand-yellow/30' : 'border-white/10 focus:border-brand-yellow'}`}
-                      >
-                        {EVENTS.filter(evt => evt.status === 'open').map(evt => (
-                          <option key={evt.id} value={evt.title} className="bg-brand-black">
-                            {evt.title}
-                          </option>
-                        ))}
-                      </select>
-                      <ChevronRight className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 text-brand-yellow pointer-events-none" />
+                    <div className="space-y-2">
+                      <label className="block text-[10px] uppercase tracking-[0.2em] text-brand-white/40 font-bold">Select Event</label>
+                      <div className="relative">
+                        <select 
+                          required
+                          value={formData.event}
+                          onChange={(e) => setFormData({...formData, event: e.target.value})}
+                          className={`w-full bg-white/5 border-b-2 p-4 outline-none transition-all text-lg font-medium appearance-none cursor-pointer ${isClosed ? 'border-red-500/50' : isSoon ? 'border-brand-yellow/30' : 'border-white/10 focus:border-brand-yellow'}`}
+                        >
+                          {EVENTS.filter(evt => evt.status === 'open').map(evt => (
+                            <option key={evt.id} value={evt.title} className="bg-brand-black">
+                              {evt.title}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronRight className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 text-brand-yellow pointer-events-none" />
+                      </div>
+                      {isClosed ? (
+                        <p className="text-red-500 text-[10px] uppercase font-black tracking-widest mt-2 animate-pulse">
+                          REGISTRATION CLOSED FOR THIS EVENT
+                        </p>
+                      ) : isSoon && (
+                        <p className="text-brand-yellow/50 text-[10px] uppercase font-black tracking-widest mt-2">
+                          REGISTRATIONS OPENING SOON
+                        </p>
+                      )}
                     </div>
-                    {isClosed ? (
-                      <p className="text-red-500 text-[10px] uppercase font-black tracking-widest mt-2 animate-pulse">
-                        REGISTRATION CLOSED FOR THIS EVENT
-                      </p>
-                    ) : isSoon && (
-                      <p className="text-brand-yellow/50 text-[10px] uppercase font-black tracking-widest mt-2">
-                        REGISTRATIONS OPENING SOON
-                      </p>
-                    )}
                   </div>
 
                   <button 
                     type="submit"
-                    disabled={!isValidPhone(formData.phone) || !formData.name || !formData.email || isClosed || isSoon}
+                    disabled={!isValidPhone(formData.phone) || !formData.name || !formData.email || !formData.gender || !formData.age || isClosed || isSoon}
                     className="w-full bg-brand-yellow text-brand-black font-black text-xl py-6 mt-4 uppercase tracking-[0.2em] hover:bg-white hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-brand-yellow/10 disabled:opacity-50 disabled:cursor-not-allowed disabled:grayscale"
                   >
                     {isClosed ? 'REGISTRATION CLOSED' : isSoon ? 'COMING SOON' : 'Confirm Registration'}
