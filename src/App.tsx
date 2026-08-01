@@ -141,6 +141,17 @@ interface BlogPost {
 // --- Data ---
 const EVENTS: Event[] = [
   {
+    id: '8',
+    title: '7AM X HIGH SPIRITS',
+    date: 'August 9, 2026',
+    location: 'HIGH SPIRITS, KOREGAON PARK',
+    time: '7:00 AM',
+    description: 'A high energy morning run followed by iconic vibes at High Spirits, Koregaon Park. Wake up, fuel your Sunday with dynamic miles, and celebrate with the active community.',
+    difficulty: 'Intermediate',
+    status: 'open',
+    price: 499
+  },
+  {
     id: '7',
     title: '7AM X SANTE FIFA RUN',
     date: 'July 12, 2026',
@@ -353,12 +364,15 @@ const SectionHeader = ({ title, subtitle }: { title: string, subtitle?: string }
 const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onClose: () => void, selectedEvent: string }) => {
   const [step, setStep] = useState<'register' | 'pay' | 'confirmed'>('register');
   const [isLoading, setIsLoading] = useState(false);
+  const openEvents = EVENTS.filter(e => e.status === 'open');
+  const defaultEventTitle = openEvents[0]?.title || EVENTS[0].title;
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     gender: '',
-    event: selectedEvent || EVENTS[0].title
+    event: (selectedEvent && openEvents.some(e => e.title === selectedEvent)) ? selectedEvent : defaultEventTitle
   });
   const [transactionId, setTransactionId] = useState('');
 
@@ -371,7 +385,9 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
   useEffect(() => {
     if (isOpen) {
       setStep('register');
-      setFormData(prev => ({ ...prev, event: selectedEvent || EVENTS[0].title }));
+      const openEvts = EVENTS.filter(e => e.status === 'open');
+      const initialEvt = (selectedEvent && openEvts.some(e => e.title === selectedEvent)) ? selectedEvent : (openEvts[0]?.title || EVENTS[0].title);
+      setFormData(prev => ({ ...prev, event: initialEvt }));
       setTransactionId('');
       setIsLoading(false);
     }
@@ -388,7 +404,9 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
 
     setIsLoading(true);
     const targetCollection = 
-      formData.event === '7AM X STARBUCKS GRANDE RUN' 
+      formData.event === '7AM X HIGH SPIRITS'
+        ? 'event_high_spirits'
+        : formData.event === '7AM X STARBUCKS GRANDE RUN' 
         ? 'event_starbucks' 
         : formData.event === '7AM X MURPHIES SUNDAY RESET'
         ? 'event_murphies_sunday_reset'
@@ -487,7 +505,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                   <div className="bg-brand-yellow/10 border border-brand-yellow/30 py-2 md:py-3 px-4 md:px-6 rounded-xl inline-block">
                     <span className="text-white/60 uppercase tracking-widest text-[9px] md:text-xs font-bold mr-2">Registration Fee:</span>
                     <span className="text-2xl md:text-3xl font-black text-brand-yellow">
-                      ₹{currentEvent?.price ? currentEvent.price : ['7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET', '7AM X SORA SUNRISE RUN', '7AM X KIOSK KAFFEE RYTHM & RUN'].includes(formData.event) ? '399' : formData.event === '7AM X SANTE FIFA RUN' ? '449' : '299'}
+                      ₹{currentEvent?.price ? currentEvent.price : ['7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET', '7AM X SORA SUNRISE RUN', '7AM X KIOSK KAFFEE RYTHM & RUN'].includes(formData.event) ? '399' : formData.event === '7AM X SANTE FIFA RUN' ? '449' : formData.event === '7AM X HIGH SPIRITS' ? '499' : '299'}
                     </span>
                   </div>
                 </div>
@@ -497,12 +515,12 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     <div className="absolute -inset-4 bg-brand-yellow/30 blur-2xl opacity-20 group-hover:opacity-50 transition duration-1000"></div>
                     <div className="relative bg-white p-3 md:p-4 rounded-xl shadow-[0_0_50px_rgba(255,255,0,0.2)] border-2 border-brand-yellow/30">
                       <img 
-                        src="/qr.png" 
+                        src="https://lh3.googleusercontent.com/d/1l0TJkSDlM0X3XWXZdtc8gQahSf7gKvX-" 
                         alt="Payments QR" 
                         className="w-full h-full object-contain rounded-lg"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "/qr.png"; 
+                          target.src = "input_file_9.png"; 
                         }}
                       />
                     </div>
@@ -618,9 +636,9 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                         onChange={(e) => setFormData({...formData, event: e.target.value})}
                         className={`w-full bg-white/5 border-b-2 p-4 outline-none transition-all text-lg font-medium appearance-none cursor-pointer ${isClosed ? 'border-red-500/50' : isSoon ? 'border-brand-yellow/30' : 'border-white/10 focus:border-brand-yellow'}`}
                       >
-                        {EVENTS.map(evt => (
+                        {EVENTS.filter(evt => evt.status === 'open').map(evt => (
                           <option key={evt.id} value={evt.title} className="bg-brand-black">
-                            {evt.title} {evt.status === 'closed' ? '(CLOSED)' : evt.status === 'soon' ? '(SOON)' : ''}
+                            {evt.title}
                           </option>
                         ))}
                       </select>

@@ -134,5 +134,13 @@ service cloud.firestore {
       
       allow list: if true;
     }
+
+    // --- High Spirits Run Registrations ---
+    match /event_high_spirits/{registrationId} {
+      allow create: if isValidId(registrationId)
+        && isValidNewRegistration(incoming());
+      
+      allow list: if true;
+    }
   }
 }
