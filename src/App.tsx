@@ -141,6 +141,17 @@ interface BlogPost {
 // --- Data ---
 const EVENTS: Event[] = [
   {
+    id: '9',
+    title: '7AM X CARI BOLLYWOOD RUN',
+    date: 'August 23, 2026',
+    location: 'CARI, AUNDH, PUNE',
+    time: '7:00 AM',
+    description: 'Get ready for high energy beats, dynamic morning miles, and an electric Bollywood celebration at Cari, Aundh, Pune. Wake up, fuel your Sunday with dynamic miles, and celebrate with the active community.',
+    difficulty: 'Intermediate',
+    status: 'open',
+    price: 499
+  },
+  {
     id: '8',
     title: '7AM X HIGH SPIRITS',
     date: 'August 9, 2026',
@@ -412,7 +423,9 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
 
     setIsLoading(true);
     const targetCollection = 
-      formData.event === '7AM X HIGH SPIRITS'
+      formData.event === '7AM X CARI BOLLYWOOD RUN'
+        ? 'event_cari_bollywood_run'
+        : formData.event === '7AM X HIGH SPIRITS'
         ? 'event_high_spirits'
         : formData.event === '7AM X STARBUCKS GRANDE RUN' 
         ? 'event_starbucks' 
@@ -513,7 +526,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                   <div className="bg-brand-yellow/10 border border-brand-yellow/30 py-2 md:py-3 px-4 md:px-6 rounded-xl inline-block">
                     <span className="text-white/60 uppercase tracking-widest text-[9px] md:text-xs font-bold mr-2">Registration Fee:</span>
                     <span className="text-2xl md:text-3xl font-black text-brand-yellow">
-                      ₹{currentEvent?.price ? currentEvent.price : ['7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET', '7AM X SORA SUNRISE RUN', '7AM X KIOSK KAFFEE RYTHM & RUN'].includes(formData.event) ? '399' : formData.event === '7AM X SANTE FIFA RUN' ? '449' : formData.event === '7AM X HIGH SPIRITS' ? '499' : '299'}
+                      ₹{currentEvent?.price ? currentEvent.price : ['7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET', '7AM X SORA SUNRISE RUN', '7AM X KIOSK KAFFEE RYTHM & RUN'].includes(formData.event) ? '399' : formData.event === '7AM X SANTE FIFA RUN' ? '449' : ['7AM X HIGH SPIRITS', '7AM X CARI BOLLYWOOD RUN'].includes(formData.event) ? '499' : '299'}
                     </span>
                   </div>
                 </div>

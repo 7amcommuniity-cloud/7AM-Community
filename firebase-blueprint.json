@@ -77,6 +77,14 @@
     "/sante_run/{registrationId}": {
       "schema": "Registration",
       "description": "New collection for 7AM X SANTE FIFA RUN event registrations"
+    },
+    "/event_high_spirits/{registrationId}": {
+      "schema": "Registration",
+      "description": "New collection for 7AM X HIGH SPIRITS event registrations"
+    },
+    "/event_cari_bollywood_run/{registrationId}": {
+      "schema": "Registration",
+      "description": "New collection for 7AM X CARI BOLLYWOOD RUN event registrations"
     }
   }
 }
