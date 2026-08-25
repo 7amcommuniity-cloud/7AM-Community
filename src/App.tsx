@@ -148,7 +148,7 @@ const EVENTS: Event[] = [
     time: '7:00 AM',
     description: 'Get ready for high energy beats, dynamic morning miles, and an electric Bollywood celebration at Cari, Aundh, Pune. Wake up, fuel your Sunday with dynamic miles, and celebrate with the active community.',
     difficulty: 'Intermediate',
-    status: 'open',
+    status: 'closed',
     price: 499
   },
   {
@@ -672,11 +672,19 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                           onChange={(e) => setFormData({...formData, event: e.target.value})}
                           className={`w-full bg-white/5 border-b-2 p-4 outline-none transition-all text-lg font-medium appearance-none cursor-pointer ${isClosed ? 'border-red-500/50' : isSoon ? 'border-brand-yellow/30' : 'border-white/10 focus:border-brand-yellow'}`}
                         >
-                          {EVENTS.filter(evt => evt.status === 'open').map(evt => (
-                            <option key={evt.id} value={evt.title} className="bg-brand-black">
-                              {evt.title}
-                            </option>
-                          ))}
+                          {EVENTS.filter(evt => evt.status === 'open').length > 0 ? (
+                            EVENTS.filter(evt => evt.status === 'open').map(evt => (
+                              <option key={evt.id} value={evt.title} className="bg-brand-black">
+                                {evt.title}
+                              </option>
+                            ))
+                          ) : (
+                            EVENTS.map(evt => (
+                              <option key={evt.id} value={evt.title} className="bg-brand-black">
+                                {evt.title} ({evt.status.toUpperCase()})
+                              </option>
+                            ))
+                          )}
                         </select>
                         <ChevronRight className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 text-brand-yellow pointer-events-none" />
                       </div>
