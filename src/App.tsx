@@ -141,6 +141,17 @@ interface BlogPost {
 // --- Data ---
 const EVENTS: Event[] = [
   {
+    id: '10',
+    title: 'THE GRANDE RUN - PAVILLION EDITION',
+    date: 'October 11, 2026',
+    location: 'THE PAVILLION, SB ROAD, PUNE',
+    time: '7:00 AM',
+    description: 'Lace up for The Grande Run - Pavillion Edition. Wake up, fuel your Sunday with dynamic miles, and celebrate with the active community at The Pavillion, SB Road.',
+    difficulty: 'Intermediate',
+    status: 'open',
+    price: 499
+  },
+  {
     id: '9',
     title: '7AM X CARI BOLLYWOOD RUN',
     date: 'August 23, 2026',
@@ -384,6 +395,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
     phone: '',
     gender: '',
     age: '',
+    tshirtSize: '',
     event: (selectedEvent && openEvents.some(e => e.title === selectedEvent)) ? selectedEvent : defaultEventTitle
   });
   const [transactionId, setTransactionId] = useState('');
@@ -393,6 +405,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
   const currentEvent = EVENTS.find(e => e.title === formData.event);
   const isClosed = currentEvent?.status === 'closed';
   const isSoon = currentEvent?.status === 'soon';
+  const isPavillionEdition = formData.event === 'THE GRANDE RUN - PAVILLION EDITION' || formData.event === '7AM X THE GRANDE RUN - PAVILLION EDITION';
 
   useEffect(() => {
     if (isOpen) {
@@ -405,6 +418,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
         phone: '',
         gender: '',
         age: '',
+        tshirtSize: '',
         event: initialEvt
       });
       setTransactionId('');
@@ -423,7 +437,9 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
 
     setIsLoading(true);
     const targetCollection = 
-      formData.event === '7AM X CARI BOLLYWOOD RUN'
+      (formData.event === 'THE GRANDE RUN - PAVILLION EDITION' || formData.event === '7AM X THE GRANDE RUN - PAVILLION EDITION')
+        ? 'event_grande_run_pavillion'
+        : formData.event === '7AM X CARI BOLLYWOOD RUN'
         ? 'event_cari_bollywood_run'
         : formData.event === '7AM X HIGH SPIRITS'
         ? 'event_high_spirits'
@@ -443,13 +459,17 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
         ? 'event_kuti'
         : 'events_2026_new';
     try {
-      const registrationData = {
+      const registrationData: Record<string, any> = {
         ...formData,
         transactionId: transactionId.trim(),
         createdAt: serverTimestamp(),
         registeredAt: serverTimestamp(),
         status: 'pending'
       };
+
+      if (!isPavillionEdition || !formData.tshirtSize) {
+        delete registrationData.tshirtSize;
+      }
 
       await addDoc(collection(db, targetCollection), registrationData);
       setStep('confirmed');
@@ -526,8 +546,13 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                   <div className="bg-brand-yellow/10 border border-brand-yellow/30 py-2 md:py-3 px-4 md:px-6 rounded-xl inline-block">
                     <span className="text-white/60 uppercase tracking-widest text-[9px] md:text-xs font-bold mr-2">Registration Fee:</span>
                     <span className="text-2xl md:text-3xl font-black text-brand-yellow">
-                      ₹{currentEvent?.price ? currentEvent.price : ['7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET', '7AM X SORA SUNRISE RUN', '7AM X KIOSK KAFFEE RYTHM & RUN'].includes(formData.event) ? '399' : formData.event === '7AM X SANTE FIFA RUN' ? '449' : ['7AM X HIGH SPIRITS', '7AM X CARI BOLLYWOOD RUN'].includes(formData.event) ? '499' : '299'}
+                      ₹{currentEvent?.price ? currentEvent.price : ['7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET', '7AM X SORA SUNRISE RUN', '7AM X KIOSK KAFFEE RYTHM & RUN'].includes(formData.event) ? '399' : formData.event === '7AM X SANTE FIFA RUN' ? '449' : ['7AM X HIGH SPIRITS', '7AM X CARI BOLLYWOOD RUN', 'THE GRANDE RUN - PAVILLION EDITION', '7AM X THE GRANDE RUN - PAVILLION EDITION'].includes(formData.event) ? '499' : '299'}
                     </span>
+                    {isPavillionEdition && formData.tshirtSize && (
+                      <div className="text-[10px] md:text-xs uppercase tracking-widest text-white/70 font-bold mt-1">
+                        T-Shirt: <span className="text-brand-yellow font-black">{formData.tshirtSize}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
                 
@@ -700,9 +725,34 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                     </div>
                   </div>
 
+                  {isPavillionEdition && (
+                    <div className="space-y-2">
+                      <label className="block text-[10px] uppercase tracking-[0.2em] text-brand-white/40 font-bold">
+                        T-Shirt Size
+                      </label>
+                      <div className="relative">
+                        <select 
+                          required
+                          value={formData.tshirtSize}
+                          onChange={(e) => setFormData({...formData, tshirtSize: e.target.value})}
+                          className="w-full bg-white/5 border-b-2 border-white/10 p-4 focus:border-brand-yellow outline-none transition-all text-lg font-medium appearance-none cursor-pointer"
+                        >
+                          <option value="" disabled className="bg-brand-black">Select T-Shirt Size</option>
+                          <option value="Small" className="bg-brand-black">Small</option>
+                          <option value="Medium" className="bg-brand-black">Medium</option>
+                          <option value="Large" className="bg-brand-black">Large</option>
+                        </select>
+                        <ChevronRight className="absolute right-4 top-1/2 -translate-y-1/2 rotate-90 text-brand-yellow pointer-events-none" />
+                      </div>
+                      <p className="text-red-500 text-xs md:text-sm font-normal tracking-wide mt-2">
+                        Important note: T-shirt size are available on a <strong className="font-bold">first-come,first-served basis</strong> and are not guaranteed.
+                      </p>
+                    </div>
+                  )}
+
                   <button 
                     type="submit"
-                    disabled={!isValidPhone(formData.phone) || !formData.name || !formData.email || !formData.gender || !formData.age || isClosed || isSoon}
+                    disabled={!isValidPhone(formData.phone) || !formData.name || !formData.email || !formData.gender || !formData.age || (isPavillionEdition && !formData.tshirtSize) || isClosed || isSoon}
                     className="w-full bg-brand-yellow text-brand-black font-black text-xl py-6 mt-4 uppercase tracking-[0.2em] hover:bg-white hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-brand-yellow/10 disabled:opacity-50 disabled:cursor-not-allowed disabled:grayscale"
                   >
                     {isClosed ? 'REGISTRATION CLOSED' : isSoon ? 'COMING SOON' : 'Confirm Registration'}

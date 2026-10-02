@@ -16,12 +16,17 @@ service cloud.firestore {
 
     function isValidNewRegistration(data) {
       return data.keys().hasAll(['name', 'email', 'phone', 'gender', 'event', 'transactionId', 'createdAt', 'registeredAt', 'status'])
-        && (data.keys().size() == 9 || (data.keys().size() == 10 && 'age' in data))
+        && (
+          data.keys().size() == 9 
+          || (data.keys().size() == 10 && ('age' in data || 'tshirtSize' in data))
+          || (data.keys().size() == 11 && 'age' in data && 'tshirtSize' in data)
+        )
         && data.name is string && data.name.size() > 0 && data.name.size() <= 100
         && data.email is string && data.email.size() <= 100
         && data.phone is string && data.phone.size() >= 10 && data.phone.size() <= 15
         && data.gender is string && data.gender.size() <= 20
         && (('age' in data) ? (data.age is string || data.age is number) : true)
+        && (('tshirtSize' in data) ? (data.tshirtSize is string && data.tshirtSize.size() <= 50) : true)
         && data.event is string && data.event.size() <= 200
         && data.transactionId is string && data.transactionId.size() > 0 && data.transactionId.size() <= 100
         && data.status == 'pending'
@@ -146,6 +151,14 @@ service cloud.firestore {
 
     // --- Cari Bollywood Run Registrations ---
     match /event_cari_bollywood_run/{registrationId} {
+      allow create: if isValidId(registrationId)
+        && isValidNewRegistration(incoming());
+      
+      allow list: if true;
+    }
+
+    // --- The Grande Run - Pavillion Edition Registrations ---
+    match /event_grande_run_pavillion/{registrationId} {
       allow create: if isValidId(registrationId)
         && isValidNewRegistration(incoming());
       
