@@ -90,6 +90,10 @@
     "/event_grande_run_pavillion/{registrationId}": {
       "schema": "Registration",
       "description": "New collection for THE GRANDE RUN - PAVILLION EDITION event registrations"
+    },
+    "/event_blue_tokai/{registrationId}": {
+      "schema": "Registration",
+      "description": "New collection for 7AM X BLUE TOKAI THE BLUE RUN event registrations"
     }
   }
 }

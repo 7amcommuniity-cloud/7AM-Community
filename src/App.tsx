@@ -141,6 +141,17 @@ interface BlogPost {
 // --- Data ---
 const EVENTS: Event[] = [
   {
+    id: '11',
+    title: '7AM X BLUE TOKAI THE BLUE RUN',
+    date: 'October 25, 2026',
+    location: 'BLUE TOKAI, BANER, PUNE',
+    time: '7:00 AM',
+    description: 'Lace up for 7AM X Blue Tokai The Blue Run. Wake up, fuel your Sunday with dynamic miles, fresh artisan brews, and celebrate with the active community at Blue Tokai, Baner.',
+    difficulty: 'Intermediate',
+    status: 'open',
+    price: 399
+  },
+  {
     id: '10',
     title: 'THE GRANDE RUN - PAVILLION EDITION',
     date: 'October 11, 2026',
@@ -148,7 +159,7 @@ const EVENTS: Event[] = [
     time: '7:00 AM',
     description: 'Lace up for The Grande Run - Pavillion Edition. Wake up, fuel your Sunday with dynamic miles, and celebrate with the active community at The Pavillion, SB Road.',
     difficulty: 'Intermediate',
-    status: 'open',
+    status: 'closed',
     price: 499
   },
   {
@@ -434,7 +445,9 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
 
     setIsLoading(true);
     const targetCollection = 
-      (formData.event === 'THE GRANDE RUN - PAVILLION EDITION' || formData.event === '7AM X THE GRANDE RUN - PAVILLION EDITION')
+      formData.event === '7AM X BLUE TOKAI THE BLUE RUN'
+        ? 'event_blue_tokai'
+        : (formData.event === 'THE GRANDE RUN - PAVILLION EDITION' || formData.event === '7AM X THE GRANDE RUN - PAVILLION EDITION')
         ? 'event_grande_run_pavillion'
         : formData.event === '7AM X CARI BOLLYWOOD RUN'
         ? 'event_cari_bollywood_run'
@@ -539,7 +552,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                   <div className="bg-brand-yellow/10 border border-brand-yellow/30 py-2 md:py-3 px-4 md:px-6 rounded-xl inline-block">
                     <span className="text-white/60 uppercase tracking-widest text-[9px] md:text-xs font-bold mr-2">Registration Fee:</span>
                     <span className="text-2xl md:text-3xl font-black text-brand-yellow">
-                      ₹{currentEvent?.price ? currentEvent.price : ['7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET', '7AM X SORA SUNRISE RUN', '7AM X KIOSK KAFFEE RYTHM & RUN'].includes(formData.event) ? '399' : formData.event === '7AM X SANTE FIFA RUN' ? '449' : ['7AM X HIGH SPIRITS', '7AM X CARI BOLLYWOOD RUN', 'THE GRANDE RUN - PAVILLION EDITION', '7AM X THE GRANDE RUN - PAVILLION EDITION'].includes(formData.event) ? '499' : '299'}
+                      ₹{currentEvent?.price ? currentEvent.price : ['7AM X BLUE TOKAI THE BLUE RUN', '7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET', '7AM X SORA SUNRISE RUN', '7AM X KIOSK KAFFEE RYTHM & RUN'].includes(formData.event) ? '399' : formData.event === '7AM X SANTE FIFA RUN' ? '449' : ['7AM X HIGH SPIRITS', '7AM X CARI BOLLYWOOD RUN', 'THE GRANDE RUN - PAVILLION EDITION', '7AM X THE GRANDE RUN - PAVILLION EDITION'].includes(formData.event) ? '499' : '299'}
                     </span>
                   </div>
                 </div>

@@ -164,5 +164,13 @@ service cloud.firestore {
       
       allow list: if true;
     }
+
+    // --- Blue Tokai The Blue Run Registrations ---
+    match /event_blue_tokai/{registrationId} {
+      allow create: if isValidId(registrationId)
+        && isValidNewRegistration(incoming());
+      
+      allow list: if true;
+    }
   }
 }
