@@ -148,7 +148,7 @@ const EVENTS: Event[] = [
     time: '7:00 AM',
     description: 'Lace up for 7AM X Blue Tokai The Blue Run. Wake up, fuel your Sunday with dynamic miles, fresh artisan brews, and celebrate with the active community at Blue Tokai, Baner.',
     difficulty: 'Intermediate',
-    status: 'open',
+    status: 'closed',
     price: 399
   },
   {
@@ -1161,6 +1161,12 @@ export default function App() {
                       {nextRun.title}<br/>
                       {nextRun.date} · {nextRun.location}<br/>
                       STAY TUNED
+                    </>
+                  ) : nextRun.status === 'closed' ? (
+                    <>
+                      {nextRun.title} · {nextRun.date}<br/>
+                      {nextRun.location}<br/>
+                      <span className="text-red-500 font-bold tracking-wider">REGISTRATION CLOSED</span>
                     </>
                   ) : (
                     <>
