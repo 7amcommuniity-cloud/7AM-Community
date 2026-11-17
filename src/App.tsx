@@ -141,6 +141,17 @@ interface BlogPost {
 // --- Data ---
 const EVENTS: Event[] = [
   {
+    id: '12',
+    title: '7AM X PAUSA LOVE ON THE RUN',
+    date: 'November 22, 2026',
+    location: 'PAUSA, BALEWADI HIGH STREET',
+    time: '7:00 AM',
+    description: 'Lace up for 7AM X Pausa Love On The Run. Wake up, fuel your Sunday with dynamic miles, great vibes, and celebrate with the active community at Pausa, Balewadi High Street.',
+    difficulty: 'Intermediate',
+    status: 'open',
+    price: 499
+  },
+  {
     id: '11',
     title: '7AM X BLUE TOKAI THE BLUE RUN',
     date: 'October 25, 2026',
@@ -445,7 +456,9 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
 
     setIsLoading(true);
     const targetCollection = 
-      formData.event === '7AM X BLUE TOKAI THE BLUE RUN'
+      formData.event === '7AM X PAUSA LOVE ON THE RUN'
+        ? 'event_pausa_love_on_the_run'
+        : formData.event === '7AM X BLUE TOKAI THE BLUE RUN'
         ? 'event_blue_tokai'
         : (formData.event === 'THE GRANDE RUN - PAVILLION EDITION' || formData.event === '7AM X THE GRANDE RUN - PAVILLION EDITION')
         ? 'event_grande_run_pavillion'
@@ -552,7 +565,7 @@ const SignupModal = ({ isOpen, onClose, selectedEvent }: { isOpen: boolean, onCl
                   <div className="bg-brand-yellow/10 border border-brand-yellow/30 py-2 md:py-3 px-4 md:px-6 rounded-xl inline-block">
                     <span className="text-white/60 uppercase tracking-widest text-[9px] md:text-xs font-bold mr-2">Registration Fee:</span>
                     <span className="text-2xl md:text-3xl font-black text-brand-yellow">
-                      ₹{currentEvent?.price ? currentEvent.price : ['7AM X BLUE TOKAI THE BLUE RUN', '7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET', '7AM X SORA SUNRISE RUN', '7AM X KIOSK KAFFEE RYTHM & RUN'].includes(formData.event) ? '399' : formData.event === '7AM X SANTE FIFA RUN' ? '449' : ['7AM X HIGH SPIRITS', '7AM X CARI BOLLYWOOD RUN', 'THE GRANDE RUN - PAVILLION EDITION', '7AM X THE GRANDE RUN - PAVILLION EDITION'].includes(formData.event) ? '499' : '299'}
+                      ₹{currentEvent?.price ? currentEvent.price : ['7AM X BLUE TOKAI THE BLUE RUN', '7AM X STARBUCKS GRANDE RUN', '7AM X MURPHIES SUNDAY RESET', '7AM X SORA SUNRISE RUN', '7AM X KIOSK KAFFEE RYTHM & RUN'].includes(formData.event) ? '399' : formData.event === '7AM X SANTE FIFA RUN' ? '449' : ['7AM X PAUSA LOVE ON THE RUN', '7AM X HIGH SPIRITS', '7AM X CARI BOLLYWOOD RUN', 'THE GRANDE RUN - PAVILLION EDITION', '7AM X THE GRANDE RUN - PAVILLION EDITION'].includes(formData.event) ? '499' : '299'}
                     </span>
                   </div>
                 </div>

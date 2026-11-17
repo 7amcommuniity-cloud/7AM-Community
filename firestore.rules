@@ -172,5 +172,13 @@ service cloud.firestore {
       
       allow list: if true;
     }
+
+    // --- Pausa Love On The Run Registrations ---
+    match /event_pausa_love_on_the_run/{registrationId} {
+      allow create: if isValidId(registrationId)
+        && isValidNewRegistration(incoming());
+      
+      allow list: if true;
+    }
   }
 }
